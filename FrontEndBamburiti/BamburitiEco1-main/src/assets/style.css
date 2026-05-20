@@ -1,0 +1,194 @@
+/* --- style.css COMPLETO E AJUSTADO PARA BAMBURITI --- */
+
+/* 1. CONFIGURAÇÕES GLOBAIS */
+body {
+    font-family: 'Inter', sans-serif;
+    padding-top: 90px; /* Espaço para o Header fixo */
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+}
+
+/* --- Cores Reutilizáveis --- */
+.text-green-main { color: #00A550 !important; }
+.bg-green-main { background-color: #00A550 !important; }
+
+/* 2. HEADER E MENU HAMBÚRGUER */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Esconde o hambúrguer no Desktop por padrão */
+.nav-hamburger {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    /* Mostra o hambúrguer apenas no Mobile */
+    .nav-hamburger {
+        display: block;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    .nav-hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background: #00A550;
+        margin: 5px 0;
+        transition: 0.3s;
+    }
+
+    /* Transforma a lista de links do Header em menu Dropdown */
+    .nav-links {
+        display: none; /* Esconde no mobile até ser clicado */
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 20px 0;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex; /* Aparece quando o estado no React for 'true' */
+    }
+}
+
+/* 3. OCULTAR CARROSSEL NO MOBILE (PROFISSIONAL) */
+@media (max-width: 768px) {
+    .carousel, .carousel-container, #home-carousel {
+        display: none !important;
+    }
+    body { padding-top: 80px; }
+}
+
+/* 4. SEÇÃO BIKE SHARING (TOTALMENTE RESPONSIVA) */
+.bike-sharing-overlay-container {
+    position: relative;
+    padding: 2.5rem;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.bike-sharing-overlay-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.bike-sharing-overlay-content {
+    position: relative;
+    z-index: 2;
+    color: #FFFFFF;
+    width: 100%;
+}
+
+.bike-sharing-title {
+    font-family: 'Simplifica', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.bike-sharing-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 200;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Ajuste Responsivo da Seção */
+@media (min-width: 769px) {
+    .bike-sharing-title, .bike-sharing-text {
+        width: 50%;
+        margin-left: 10%;
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    .bike-sharing-overlay-content {
+        text-align: center;
+    }
+    .bike-sharing-title, .bike-sharing-text {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+/* 5. CARDS E CONTEÚDO */
+.card-container-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+#nossas-bicicletas .card-img-top {
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.section-title {
+    font-family: 'Simplifica', sans-serif;
+    color: #00A550;
+    font-size: 38px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* 6. BOTÕES E FORMULÁRIOS */
+.btn-success {
+    font-family: 'Simplifica', sans-serif;
+    background-color: #00A550 !important;
+    border-radius: 50px !important;
+    padding: 10px 25px !important;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border: none !important;
+    transition: 0.3s;
+}
+
+.btn-success:hover { background-color: #247a4c !important; }
+
+@media (max-width: 480px) {
+    .btn-success { width: 100% !important; }
+}
+
+/* 7. RODAPÉ */
+.bg-green-footer {
+    background-color: #00A550 !important;
+    color: #FFFFFF !important;
+    padding: 40px 20px;
+}
+
+.bg-green-footer p { color: #FFFFFF !important; }
+
+/* 8. CHATBOT  */
+@media (max-width: 480px) {
+    .chatbot-container { /* Altere para a classe real do seu ChatBot */
+        bottom: 10px;
+        right: 10px;
+        transform: scale(0.9);
+    }
+}

@@ -1,0 +1,127 @@
+:root {
+  --verde-miv: #00A550;
+  --craft-miv: #A68059;
+  --dark-miv: #1A1A1A;
+  --bg-atelie: #FDFBFA;
+  --font-simplifica: 'Simplifica', sans-serif;
+}
+
+.bamburiti-atelier-root {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 10000;
+}
+
+/* TRIGGER PÍLULA */
+.atelier-trigger-pill {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  background: var(--dark-miv);
+  border: 1.5px solid var(--craft-miv);
+  padding: 12px 25px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.atelier-trigger-pill:hover { border-color: var(--verde-miv); transform: translateY(-3px); }
+.leaf-icon-pill { color: var(--verde-miv); font-size: 1.1rem; }
+.pill-label { color: #fff; font-family: var(--font-simplifica); font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+
+/* PAINEL LATERAL */
+.atelier-panel {
+  width: 400px;
+  height: 100vh;
+  background: var(--bg-atelie);
+  position: fixed;
+  top: 0;
+  right: -450px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+  border-left: 1px solid rgba(166, 128, 89, 0.2);
+}
+
+.is-open .atelier-panel { right: 0; }
+.panel-close { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 20px; color: #ccc; cursor: pointer; transition: 0.3s; }
+.panel-close:hover { color: var(--dark-miv); }
+
+/* HEADER */
+.panel-header { padding: 60px 40px 20px; }
+.panel-header h2 { font-family: var(--font-simplifica); font-size: 40px; color: var(--dark-miv); margin: 5px 0 0; }
+.panel-header p { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--craft-miv); font-weight: 700; }
+.header-line { width: 35px; height: 3px; background: var(--verde-miv); margin-top: 15px; }
+
+/* CONTEÚDO E TEXTO */
+.panel-content { padding: 0 40px; flex: 1; }
+.description-text { 
+  font-size: 15px; 
+  line-height: 1.8; 
+  color: #555; 
+  margin-bottom: 45px; /* Espaço generoso entre texto e botão */
+}
+
+/* BOTÃO DE AÇÃO (MENOR E REFINADO) */
+.btn-atelier-action, .btn-atelier-send, .btn-atelier-close {
+  width: 100%;
+  background: var(--verde-miv);
+  color: white;
+  border: none;
+  padding: 12px 20px; /* Reduzido para ser mais discreto */
+  font-family: var(--font-simplifica);
+  font-size: 16px; /* Fonte menor conforme solicitado */
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+.btn-atelier-action:hover, .btn-atelier-send:hover, .btn-atelier-close:hover {
+  background: var(--dark-miv);
+}
+
+/* Botão específico de fechar (Passo 4) - Se quiser um estilo diferente, pode mudar aqui */
+.btn-atelier-close {
+  background: var(--dark-miv); /* Cor grafite para diferenciar do envio */
+  margin-top: 30px;
+}
+
+.btn-atelier-close:hover {
+  background: var(--craft-miv);
+}
+
+/* INPUTS */
+.input-field { margin-bottom: 30px; }
+.input-field label { display: block; font-size: 10px; font-weight: 800; color: var(--craft-miv); margin-bottom: 10px; }
+.input-field input, .input-field textarea {
+  width: 100%; border: none; border-bottom: 1px solid #ddd;
+  background: transparent; padding: 10px 0; font-size: 15px;
+}
+.input-field input:focus, .input-field textarea:focus { outline: none; border-bottom-color: var(--verde-miv); }
+
+/* SUCESSO */
+.success-view { text-align: center; padding-top: 30px; }
+.success-circle { 
+  width: 60px; height: 60px; border: 2px solid var(--verde-miv); 
+  border-radius: 50%; display: flex; align-items: center; 
+  justify-content: center; margin: 0 auto 20px; 
+  font-size: 24px; color: var(--verde-miv); 
+}
+
+.panel-footer { padding: 30px 40px; font-size: 10px; color: #ccc; text-align: center; }
+
+.step-fade { animation: fadeUp 0.5s ease forwards; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
