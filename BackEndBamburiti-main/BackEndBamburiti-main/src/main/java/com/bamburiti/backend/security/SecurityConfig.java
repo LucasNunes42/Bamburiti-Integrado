@@ -21,16 +21,16 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 @Configuration
 @EnableWebSecurity
-@OpenAPIDefinition(
-    info = @Info(title = "Bamburiti API", version = "v1"),
-    security = @SecurityRequirement(name = "bearerAuth") // Isso coloca o cadeado em todas as rotas
+@OpenAPIDefinition(info = @Info(title = "Bamburiti API", version = "v1"), security = @SecurityRequirement(name = "bearerAuth") // Isso
+																																// coloca
+																																// o
+																																// cadeado
+																																// em
+																																// todas
+																																// as
+																																// rotas
 )
-@SecurityScheme(
-    name = "bearerAuth",
-    type = SecuritySchemeType.HTTP,
-    scheme = "bearer",
-    bearerFormat = "JWT"
-)
+@SecurityScheme(name = "bearerAuth", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")
 public class SecurityConfig {
 	@Autowired
 	private SecurityFilter securityFilter;
@@ -43,8 +43,12 @@ public class SecurityConfig {
 					req.requestMatchers(HttpMethod.POST, "/api/auth/registrar").permitAll();
 					req.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll(); // Libera o Login
 					req.requestMatchers("/api/leads/**").permitAll(); // Libera o Chatbot/Leads
-					req.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll(); 
-																							// PARA LIBERAR O SWAGGER
+					req.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll();
+
+					req.requestMatchers(HttpMethod.GET, "/api/posts").permitAll(); // Qualquer um lê os posts
+					req.requestMatchers(HttpMethod.POST, "/api/posts/com-foto").permitAll(); // Libera o upload para
+					req.requestMatchers("/uploads/**").permitAll();																			// testes// 
+																								
 					req.anyRequest().authenticated(); // Bloqueia todo o resto
 				})
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

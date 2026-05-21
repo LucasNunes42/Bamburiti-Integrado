@@ -1,0 +1,61 @@
+.bamburiti-posts-section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.bamburiti-posts-title {
+  color: #00a859; /* O mesmo tom verde característico da sua marca */
+  font-size: 2rem;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.bamburiti-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.bamburiti-post-card {
+  background: #ffffff;
+  border-radius: 16px; /* Bordas arredondadas suaves */
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Sombra difusa e elegante da imagem 2 */
+  transition: transform 0.3s ease;
+}
+
+.bamburiti-post-card:hover {
+  transform: translateY(-5px);
+}
+
+.bamburiti-card-image-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.bamburiti-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bamburiti-card-content {
+  padding: 24px;
+  text-align: left;
+}
+
+.bamburiti-card-title {
+  color: #00a859;
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.bamburiti-card-description {
+  color: #555555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}

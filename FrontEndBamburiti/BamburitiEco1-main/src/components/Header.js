@@ -39,6 +39,7 @@ function Header() {
             <li><a href="#agroecologia" onClick={() => setMenuMobile(false)}>Agroecologia</a></li>
             <li><a href="#workshop" onClick={() => setMenuMobile(false)}>Workshop</a></li>
             <li><a href="#bio" onClick={() => setMenuMobile(false)}>Bio Estruturas</a></li>
+            <li><Link to="/blog" onClick={() => setMenuMobile(false)}>Blog</Link></li>
             <li><a href="#sobre" onClick={() => setMenuMobile(false)}>Sobre</a></li>
           </ul>
         </nav>

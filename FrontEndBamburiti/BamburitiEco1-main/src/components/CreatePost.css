@@ -1,0 +1,26 @@
+/* Importa as variáveis e a estrutura base para não duplicar código à toa */
+@import './Register.css';
+
+/* Customização específica para a Textarea estilo Ateliê */
+.atelier-input-group textarea {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1.5px solid #eee;
+  background: transparent;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  transition: 0.3s;
+  resize: vertical; /* Permite o usuário esticar apenas para baixo */
+}
+
+.atelier-input-group textarea:focus {
+  outline: none;
+  border-bottom-color: var(--verde-miv);
+}
+
+/* Ajuste sutil no botão para a ação de publicar */
+.btn-atelier-register:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
