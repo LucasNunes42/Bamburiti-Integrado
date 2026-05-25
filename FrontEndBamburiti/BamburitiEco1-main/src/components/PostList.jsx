@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './PostList.css';
+import { Link } from 'react-router-dom';
 
 const PostList = () => {
     const [posts, setPosts] = useState([]);
@@ -26,8 +27,10 @@ const PostList = () => {
                             />
                         </div>
                         <div className="bamburiti-card-content">
+                            <Link to={`/blog/${post.id}`} style={{ textDecoration: 'none' }}>
                             <h3 className="bamburiti-card-title">{post.titulo}</h3>
-                            <p className="bamburiti-card-description">{post.conteudo}</p>
+                            </Link>
+                            <p className="bamburiti-card-description">{post.conteudo.substring(0, 100)}</p>
                         </div>
                     </div>
                 ))}

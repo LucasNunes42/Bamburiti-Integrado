@@ -1,0 +1,80 @@
+/* Fundo da página para dar destaque ao artigo */
+.post-details-page {
+  padding: 60px 20px;
+  background-color: #fdfbfa; /* Aquele fundo clarinho estilo ateliê */
+  min-height: calc(100vh - 200px); /* Garante que o footer fique no fundo */
+}
+
+/* O cartão branco onde o texto fica dentro */
+.post-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Sombra elegante */
+}
+
+/* Link de voltar */
+.post-back-link {
+  display: inline-block;
+  color: #00a859;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 25px;
+  transition: color 0.3s ease;
+}
+
+.post-back-link:hover {
+  color: #007a40; /* Verde mais escuro ao passar o mouse */
+}
+
+/* Título principal do artigo */
+.post-details-title {
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+/* Informações de autor e data */
+.post-details-meta {
+  color: #888888;
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eeeeee; /* Linha sutil separando o cabeçalho do conteúdo */
+}
+
+/* Imagem de capa */
+.post-details-img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 35px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Corpo do texto */
+.post-details-content {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #444444;
+  white-space: pre-wrap; /* Mantém as quebras de linha que o usuário digitou */
+}
+
+/* --- RESPONSIVIDADE PARA CELULARES --- */
+@media (max-width: 768px) {
+  .post-details-page {
+    padding: 30px 15px;
+  }
+
+  .post-details-container {
+    padding: 25px;
+  }
+
+  .post-details-title {
+    font-size: 2rem;
+  }
+}
