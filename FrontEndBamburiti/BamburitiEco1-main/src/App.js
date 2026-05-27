@@ -8,6 +8,7 @@ import PostList from './components/PostList';
 import CreatePost from './components/CreatePost';
 import PostDetails from './components/PostDetails';
 import Login from './components/Login';
+import Sobre from './components/Sobre';
 
 // Componentes da Home 
 import Carousel from "./components/Carousel";
@@ -45,6 +46,7 @@ function App() {
           <Route path="/blog" element={<PostList />} />
           <Route path="/blog/:id" element={<PostDetails />} />
           <Route path="login" element={<Login />} />
+          <Route path="sobre" element={<Sobre />} />
 
         </Route>
       </Routes>

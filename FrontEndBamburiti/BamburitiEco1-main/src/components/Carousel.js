@@ -16,13 +16,13 @@ const slides = [
   },
   {
     imagem: img2,
-    titulo: "Design em Bambu",
-    subtitulo: "Leve, resistente e ecológico"
+    titulo: "Bio Estruturas",
+    subtitulo: "Soluções arquitetônicas sustentáveis"
   },
   {
     imagem: img3,
-    titulo: "Conecte-se à Natureza",
-    subtitulo: "Pedale para um futuro melhor"
+    titulo: "Cicloturismo",
+    subtitulo: "Aproveite a cidade e as trilhas do Distrito Federal em nossas bikes de bamboo."
   }
 ];
 
