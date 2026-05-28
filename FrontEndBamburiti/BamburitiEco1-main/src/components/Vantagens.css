@@ -1,0 +1,83 @@
+/* SEÇÃO PRINCIPAL */
+.vantagens-section {
+  padding: 80px 20px;
+  background: #ffffff;
+  text-align: center;
+}
+
+/* TÍTULO: Exatamente como as estilizações de antes */
+.vantagens-title {
+  font-size: 36px;
+  color: #00A550; 
+  margin-bottom: 50px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif; /* Tipografia do manual */
+}
+
+/* CONTAINER DOS CARDS */
+.vantagens-container {
+  display: flex;
+  gap: 40px; /* Espaço generoso entre os cards */
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* CARD ROBUSTO */
+.vantagem-card {
+  background: #fff;
+  border-radius: 20px; 
+  width: 400px; /* Largura aumentada para robustez */
+  padding: 0; /* Padding zero para a imagem ocupar tudo */
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Sombra para dar profundidade */
+  border: none; /* Sem bordinha verde */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Corta a imagem nos cantos arredondados do card */
+}
+
+/* EFEITO DE HOVER */
+.vantagem-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+}
+
+/* IMAGEM FULL WIDTH */
+.vantagem-card img {
+  width: 100%;
+  height: 280px; /* Altura aumentada para preencher melhor o card */
+  object-fit: cover;
+  margin-bottom: 0;
+}
+
+/* CONTEÚDO DE TEXTO (Com padding interno) */
+.card-content {
+  padding: 30px 35px 40px 35px; /* Respiro apenas para o texto */
+}
+
+/* TÍTULO DO CARD */
+.vantagem-card h3 {
+  font-size: 24px;
+  color: #00A550;
+  margin-bottom: 15px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* DESCRIÇÃO */
+.vantagem-card p {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  .vantagem-card {
+    width: 100%; /* Em telas pequenas, ocupa a largura disponível */
+    max-width: 400px;
+  }
+}
