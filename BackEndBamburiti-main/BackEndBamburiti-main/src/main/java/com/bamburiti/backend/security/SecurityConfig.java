@@ -41,6 +41,10 @@ public class SecurityConfig {
 					req.requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll();
 					req.requestMatchers("/uploads/**").permitAll();
 
+					// 🔐 TRANCA DO ADMINISTRADOR (Exige a autoridade exata "ADMIN")
+                    // Adicionamos as rotas literais de admin para que usuários comuns sejam barrados aqui
+                    req.requestMatchers("/admin", "/admin/**", "/api/admin/**").hasRole("ADMIN");
+
 					// 🔐 Bloqueios do Administrador (Exige o Token JWT com perfil ADMIN)
 					req.requestMatchers(HttpMethod.POST, "/api/posts/com-foto").hasRole("ADMIN");
 					req.requestMatchers(HttpMethod.PUT, "/api/posts/**").hasRole("ADMIN"); 
