@@ -25,4 +25,9 @@ public class Lead {
 	private String email;
 	@Column(columnDefinition = "TEXT")
 	private String texto;
+<<<<<<< HEAD
+=======
+	@Column(name = "data_criacao", nullable = false)
+	private java.time.LocalDateTime dataCriacao = java.time.LocalDateTime.now();
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 }

@@ -1,7 +1,11 @@
 -- INSERT INTO USUARIO (email, senha, esta_logado, tipo_usuario) VALUES ('teste@bamburiti.com', '$2a$12$QHxANnSJ7skjP/EeBdHKsOzhSNVJgK8cuuALIuK1tQEBXN/Uk5O/q', false, 'ADMIN'); --
 -- INSERT INTO posts (titulo, conteudo, url_imagem, data_publicacao, autor) VALUES ('Minha Primeira Bicicleta de Bambu', 'Conteúdo sobre a sustentabilidade do bambu...', 'http://link-da-imagem.jpg', NOW(), 'Admin'); --
+<<<<<<< HEAD
 INSERT INTO USUARIO (email, senha, esta_logado, tipo_usuario) VALUES ('teste@bamburiti.com', '$2a$04$lonU1veBqclixtuQsOpCiuBfmNmpUokTlzNSSOHBUE88XByGHiYsi', false, 'ADMIN');
 -- --
+=======
+INSERT INTO USUARIO (email, senha, esta_logado, tipo_usuario, data_cadastro) VALUES ('teste@bamburiti.com', '$2a$04$lonU1veBqclixtuQsOpCiuBfmNmpUokTlzNSSOHBUE88XByGHiYsi', false, 'ADMIN', NOW());
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 
 INSERT INTO posts (titulo, conteudo, autor, url_imagem, data_publicacao) VALUES ('Bambu - A tecnologia da Natureza', 'O bambu é uma planta da família das gramíneas (a mesma do arroz e do trigo), conhecida por sua alta resistência e crescimento ultrarrápido, podendo crescer até 50 cm por dia. É um recurso 100% renovável, famoso por suas mais de mil utilidades, que vão desde a bioconstrução até a culinária.', 'Equipe Bamburiti', '/uploads/bambu1.png', NOW());
 

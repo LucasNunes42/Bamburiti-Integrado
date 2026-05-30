@@ -4,8 +4,13 @@ import './CreatePost.css';
 const CreatePost = () => {
   const [titulo, setTitulo] = useState('');
   const [conteudo, setConteudo] = useState('');
+<<<<<<< HEAD
   const [autor, setAutor] = useState('Equipe Bamburiti'); // Valor padrão
   const [arquivo, setArquivo] = useState(null); // Estado para guardar o arquivo binário
+=======
+  const [autor, setAutor] = useState('Equipe Bamburiti'); 
+  const [arquivo, setArquivo] = useState(null); 
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -17,23 +22,41 @@ const CreatePost = () => {
 
     setLoading(true);
 
+<<<<<<< HEAD
     // 📦 Monta o multipart/form-data idêntico ao que o seu Java espera
+=======
+    // 🔑 1. Recupera o token do armazenamento local
+    const token = localStorage.getItem('token');
+
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
     const formData = new FormData();
     formData.append('titulo', titulo);
     formData.append('conteudo', conteudo);
     formData.append('autor', autor);
+<<<<<<< HEAD
     formData.append('arquivo', arquivo); // Envia o arquivo binário real
+=======
+    formData.append('arquivo', arquivo); 
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 
     try {
       const response = await fetch('http://localhost:8080/api/posts/com-foto', {
         method: 'POST',
+<<<<<<< HEAD
         // ⚠️ ATENÇÃO: Nunca defina 'Content-Type': 'application/json' ou 'multipart/form-data' aqui! 
         // O próprio navegador cuida do boundary automático quando passamos um objeto FormData.
+=======
+        // 🛡️ 2. Adiciona o token no cabeçalho de autorização!
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
         body: formData 
       });
 
       if (response.ok) {
         alert("Post publicado com sucesso no ecossistema!");
+<<<<<<< HEAD
         // Limpa os campos
         setTitulo('');
         setConteudo('');
@@ -41,6 +64,14 @@ const CreatePost = () => {
         e.target.reset(); // Reseta o campo visual de arquivo do HTML
       } else {
         alert("Falha ao salvar o post no banco.");
+=======
+        setTitulo('');
+        setConteudo('');
+        setArquivo(null);
+        e.target.reset(); 
+      } else {
+        alert("Falha ao salvar o post no banco. Verifique se seu token é válido.");
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
       }
     } catch (error) {
       console.error(error);
@@ -78,7 +109,10 @@ const CreatePost = () => {
 
           <div className="atelier-input-group">
             <label>FOTO / IMAGEM DO POST</label>
+<<<<<<< HEAD
             {/* 🆕 Mudado para seletor de arquivos real */}
+=======
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
             <input 
               type="file" 
               accept="image/*" 

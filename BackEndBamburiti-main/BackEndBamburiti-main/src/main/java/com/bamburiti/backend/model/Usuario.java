@@ -1,5 +1,9 @@
 package com.bamburiti.backend.model;
 
+<<<<<<< HEAD
+=======
+import java.time.LocalDateTime;
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 import java.util.Collection;
 import java.util.List;
 
@@ -7,11 +11,19 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+<<<<<<< HEAD
+=======
+import jakarta.persistence.Column;
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+<<<<<<< HEAD
+=======
+import org.hibernate.annotations.CreationTimestamp;
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 
 @Entity
 @Table(name = "USUARIO")
@@ -27,6 +39,13 @@ public class Usuario implements UserDetails { // Adicionado o "implements UserDe
 	private Boolean estaLogado;
 	private String tipoUsuario;
 
+<<<<<<< HEAD
+=======
+	@CreationTimestamp
+	@Column(name = "data_cadastro", nullable = false, updatable = false)
+    private LocalDateTime dataCadastro;
+
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -76,6 +95,17 @@ public class Usuario implements UserDetails { // Adicionado o "implements UserDe
 		this.tipoUsuario = tipoUsuario;
 	}
 
+<<<<<<< HEAD
+=======
+	public LocalDateTime getDataCadastro() { 
+        return dataCadastro; 
+    }
+    
+    public void setDataCadastro(LocalDateTime dataCadastro) { 
+        this.dataCadastro = dataCadastro; 
+    }
+
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 	// --- NOVOS MÉTODOS DO SPRING SECURITY (OBRIGATÓRIOS) ---
 
 	@Override

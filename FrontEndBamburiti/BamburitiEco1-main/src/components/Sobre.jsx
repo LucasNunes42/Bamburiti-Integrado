@@ -5,16 +5,26 @@ import fotoVitor from '../assets/img/vitor-bamburiti.jpg'; // 🆕 Sua nova imag
 export default function Sobre() {
   return (
     <div className="sobre-container">
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
       {/* SEÇÃO 1: HERO / INTRODUÇÃO */}
       <section className="sobre-hero">
         <div className="sobre-content-wrapper">
           <span className="sobre-tagline">Conheça a nossa jornada</span>
           <h1>A Essência da Bamburiti</h1>
           <p className="sobre-main-text">
+<<<<<<< HEAD
             A Bamburiti nasceu da paixão pela arte e da motivação de associar o design moderno 
             a materiais naturais e sustentáveis, principalmente o bambu. Somos uma empresa de soluções 
             que trabalha com o desenvolvimento de projetos, tecnologias e produtos focados nos 
+=======
+            A Bamburiti nasceu da paixão pela arte e da motivação de associar o design moderno
+            a materiais naturais e sustentáveis, principalmente o bambu. Somos uma empresa de soluções
+            que trabalha com o desenvolvimento de projetos, tecnologias e produtos focados nos
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
             preceitos da Agroecologia e Permacultura.
           </p>
         </div>
@@ -30,12 +40,21 @@ export default function Sobre() {
             <span className="sobre-tagline">Quem está à frente</span>
             <h2>Vitor Hugo Moraes de Lima</h2>
             <p>
+<<<<<<< HEAD
               Nascido em Taguatinga - DF, Vitor é o coração criativo da Bamburiti. Acadêmico nas 
               ciências da agroecologia pelo Instituto Federal de Brasília (IFB) e com bagagem em 
               Engenharia Agrícola pela Universidade Federal do Pampa (UNIPAMPA - RS). 
             </p>
             <p>
               Sua trajetória une o olhar sensível do audiovisual com a força técnica do artesanato 
+=======
+              Nascido em Taguatinga - DF, Vitor é o coração criativo da Bamburiti. Acadêmico nas
+              ciências da agroecologia pelo Instituto Federal de Brasília (IFB) e com bagagem em
+              Engenharia Agrícola pela Universidade Federal do Pampa (UNIPAMPA - RS).
+            </p>
+            <p>
+              Sua trajetória une o olhar sensível do audiovisual com a força técnica do artesanato
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
               construtor e do arte design em bambu, transformando ideias em estruturas vivas e ecológicas.
             </p>
           </div>
@@ -49,7 +68,11 @@ export default function Sobre() {
           <p className="impacto-sub">
             Nosso diferencial está na capacidade de transformar e inovar através de um elemento fundamental: o bambu.
           </p>
+<<<<<<< HEAD
           
+=======
+
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
           <div className="impacto-cards-grid">
             <div className="impacto-card">
               <h3>Resistência de Aço</h3>
@@ -74,6 +97,7 @@ export default function Sobre() {
         <div className="cta-box">
           <h2>Quer conhecer mais de perto?</h2>
           <p>
+<<<<<<< HEAD
             Oferecemos soluções que vão desde o nosso famoso <strong>Bike Tour em Bicicletas de Bambu</strong>, 
             até Estruturas Rurais, projetos para Glamping, Sistemas de Aquaponia, Workshops e programas 
             de capacitação em Design.
@@ -82,6 +106,16 @@ export default function Sobre() {
           <button className="btn-contato" onClick={() => window.location.href = '#contato'}>
             Descubra o Modo Bamburiti de Ser
           </button>
+=======
+            Oferecemos soluções que vão desde o nosso famoso <strong>Bike Tour em Bicicletas de Bambu</strong>,
+            até Estruturas Rurais, projetos para Glamping, Sistemas de Aquaponia, Workshops e programas
+            de capacitação em Design.
+          </p>
+          {/* 🆕 Texto atualizado orientando sobre o ChatBot */}
+          <p className="cta-highlight">
+            Clique do botão no canto inferior direito da tela e fale conosco!
+          </p>
+>>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
         </div>
       </section>
 
