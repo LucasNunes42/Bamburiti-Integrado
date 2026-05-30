@@ -1,0 +1,74 @@
+.bikesharing-section {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.bikesharing-container {
+  width: 100%;
+  max-width: 1400px; /* Largura grande conforme pedido */
+  
+  /* AJUSTE PARA NÃO CORTAR AS FOLHAS: 
+     100% 100% obriga a imagem a preencher todo o espaço sem cortes nas laterais */
+  background-size: 100% 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Altura proporcional para a imagem não ficar achatada */
+  height: 350px; 
+  
+  /* ALINHAMENTO À ESQUERDA */
+  display: flex;
+  align-items: center; 
+  justify-content: flex-start; 
+  
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.bikesharing-content {
+  /* GARANTE TEXTO BRANCO E À ESQUERDA */
+  text-align: left; 
+  color: white !important; 
+  
+  max-width: 500px; 
+  padding-left: 80px; /* Espaço para o texto não ficar colado na borda esquerda */
+}
+
+.bikesharing-title {
+  font-family: 'Arial', sans-serif;
+  font-size: 38px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: white !important; /* Reforça o branco no título */
+}
+
+.bikesharing-text {
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: white !important; /* Reforça o branco no parágrafo */
+  margin: 0;
+}
+
+.bikesharing-text strong {
+  font-weight: bold;
+}
+
+/* Responsividade para Celular */
+@media (max-width: 768px) {
+  .bikesharing-container {
+    height: auto;
+    min-height: 250px;
+    background-size: cover; /* No celular o cover funciona melhor para não achatar */
+    padding: 40px 20px;
+  }
+  
+  .bikesharing-content {
+    padding-left: 20px;
+    max-width: 100%;
+    text-align: center; /* No celular centralizado costuma ler melhor */
+  }
+}

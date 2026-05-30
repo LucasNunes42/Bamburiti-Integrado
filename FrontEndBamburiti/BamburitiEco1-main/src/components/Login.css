@@ -1,0 +1,212 @@
+/* PALETA OFICIAL BAMBURITI */
+:root {
+  --verde-miv: #00A550;
+  --craft-miv: #A68059;
+  --dark-miv: #1A1A1A;
+  --bg-atelie: #FDFBFA;
+  --font-simplifica: 'Simplifica', sans-serif;
+}
+
+.atelier-login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--bg-atelie);
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+.atelier-login-card {
+  background: #ffffff;
+  padding: 60px 50px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(166, 128, 89, 0.2);
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* HEADER ESTILO ATELIÊ */
+.login-header-atelier {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.login-tag {
+  font-size: 10px;
+  font-weight: 800;
+  color: #bbb;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.login-title-atelier {
+  font-family: var(--font-simplifica);
+  font-size: 3.2rem;
+  color: var(--dark-miv);
+  margin: 5px 0 0;
+  line-height: 1;
+}
+
+.login-subtitle-atelier {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--craft-miv);
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.header-line-atelier {
+  width: 35px;
+  height: 3px;
+  background: var(--verde-miv);
+  margin: 20px auto 0;
+}
+
+/* FORMULÁRIO */
+.login-form-atelier {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.atelier-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.atelier-input-group label {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--craft-miv);
+  letter-spacing: 1px;
+}
+
+.atelier-input-group input {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1.5px solid #eee;
+  background: transparent;
+  font-size: 16px;
+  transition: 0.3s;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+.atelier-input-group input:focus {
+  outline: none;
+  border-bottom-color: var(--verde-miv);
+}
+
+.btn-atelier-login {
+  width: 100%;
+  background: var(--verde-miv);
+  color: white;
+  border: none;
+  padding: 16px;
+  font-family: var(--font-simplifica);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.btn-atelier-login:hover {
+  background: var(--dark-miv);
+}
+
+.login-footer-atelier {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+.login-footer-atelier a {
+  color: var(--verde-miv);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-footer-atelier a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   ALINHAMENTO TÉCNICO DO ÍCONE IMPORTADO DO PROJETO (LOGIN)
+   ========================================================================== */
+
+.senha-input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Garante que o texto digitado não fique embaixo do olho no campo minimalista */
+.senha-input-container input {
+  padding-right: 35px !important;
+}
+
+.btn-olho-senha {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none !important;
+  border: none !important;
+  outline: none !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  color: #666; 
+  opacity: 0.9; 
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.btn-olho-senha:hover {
+  color: var(--verde-miv); 
+}
+
+.btn-olho-senha svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* --- REGRAS DE RESPONSIVIDADE (MOBILE) --- */
+@media (max-width: 768px) {
+  .atelier-login-wrapper {
+    padding: 30px 15px;
+  }
+
+  .atelier-login-card {
+    padding: 40px 25px;
+    box-shadow: none;
+    border: none;
+  }
+
+  .login-title-atelier {
+    font-size: 2.2rem;
+  }
+
+  .login-form-atelier {
+    gap: 20px;
+  }
+
+  .btn-atelier-login {
+    padding: 18px;
+    font-size: 16px;
+  }
+}

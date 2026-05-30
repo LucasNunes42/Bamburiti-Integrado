@@ -1,0 +1,90 @@
+#bambooBikeCarousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-inner {
+  height: 80vh;
+  max-height: 700px;
+  min-height: 550px;
+}
+
+.carousel-item {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* TEXTO */
+.custom-carousel-caption {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+  color: white;
+}
+
+.custom-carousel-caption h1 {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.custom-carousel-caption h2 {
+  font-size: 20px;
+}
+
+/* BOTÕES */
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 35px;
+  height: 35px;
+
+  background: rgba(0,0,0,0.4);
+  border-radius: 50%;
+  border: none;
+
+  color: white;
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.carousel-control-prev {
+  left: 20px;
+}
+
+.carousel-control-next {
+  right: 20px;
+}
+
+/* INDICADORES */
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.carousel-indicators span {
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.carousel-indicators .active {
+  background: #00A550;
+}

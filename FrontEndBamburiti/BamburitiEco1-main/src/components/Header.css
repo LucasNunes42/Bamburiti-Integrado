@@ -1,0 +1,163 @@
+/* --- HEADER FIXO --- */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 1000;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* --- CONTAINER --- */
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 60px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* --- ÍCONE HAMBÚRGUER (ESCONDIDO POR PADRÃO NO DESKTOP) --- */
+.mobile-menu-icon {
+  display: none; /* Isso garante que ele não apareça no PC */
+  font-size: 24px;
+  color: #00A550;
+  cursor: pointer;
+  order: 1; /* Posiciona à esquerda no mobile se desejar */
+}
+
+/* --- COLUNAS --- */
+.header-left,
+.header-center,
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.header-center {
+  flex: 1;
+  justify-content: center;
+}
+
+.navbar-logo {
+  height: 42px;
+}
+
+/* --- MENU DESKTOP --- */
+.header-menu {
+  display: flex;
+  gap: 35px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-menu a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #000;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.header-menu a:hover {
+  color: #00A550;
+  font-weight: 600;
+}
+
+/* --- DIREITA / AÇÕES --- */
+.header-actions {
+  gap: 25px;
+}
+
+.header-icon {
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* --- DROPDOWN CONTA --- */
+.account-area {
+  position: relative;
+}
+
+.dropdown-menu-custom {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  z-index: 1001;
+}
+
+.dropdown-menu-custom button {
+  background: none;
+  border: none;
+  padding: 10px 16px;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.dropdown-menu-custom button:hover {
+  background: #f5f5f5;
+  color: #00A550;
+}
+
+/* --- MODO RESPONSIVO (MOBILE/TABLET) --- */
+
+@media (max-width: 992px) {
+  .header-container {
+    padding: 0 20px;
+  }
+
+  /* Mostra o hambúrguer apenas aqui */
+  .mobile-menu-icon {
+    display: block;
+  }
+
+  /* Transforma a barra central em um menu que "cai" */
+  .header-center {
+    display: none; /* Esconde o menu horizontal */
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    flex-direction: column;
+    padding: 20px 0;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+    z-index: 999;
+  }
+
+  /* Classe ativada pelo React (menuMobile) */
+  .header-center.active {
+    display: flex;
+  }
+
+  .header-menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .header-menu li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-menu a {
+    font-size: 16px;
+    display: block;
+    padding: 10px 0;
+  }
+}

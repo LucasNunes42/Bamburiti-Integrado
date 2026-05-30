@@ -1,0 +1,205 @@
+:root {
+  --verde-bamburiti: #00A550; /* Verde oficial das imagens atuais */
+  --texto-escuro: #2b2b2b;
+  --texto-suave: #555555;
+  --bg-claro: #ffffff;
+  --bg-cinza: #f9f9f9;
+  --radius-custom: 24px; /* Raio arredondado dos seus cards atuais */
+}
+
+.sobre-container {
+  font-family: 'Inter', sans-serif; /* Substitua pela fonte padrão do seu projeto */
+  color: var(--texto-escuro);
+  background-color: var(--bg-claro);
+  line-height: 1.6;
+}
+
+.sobre-content-wrapper {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.sobre-tagline {
+  display: block;
+  color: var(--verde-bamburiti);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+/* HERO */
+.sobre-hero {
+  padding: 80px 0 60px 0;
+}
+
+.sobre-hero h1 {
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 25px;
+}
+
+.sobre-main-text {
+  font-size: 18px;
+  color: var(--texto-suave);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* FUNDADOR (GRID) */
+.sobre-fundador {
+  background-color: var(--bg-cinza);
+  padding: 80px 0;
+}
+
+.sobre-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.fundador-imagem-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.fundador-img {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  border-radius: var(--radius-custom);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  object-fit: cover;
+}
+
+.fundador-texto h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.fundador-texto p {
+  color: var(--texto-suave);
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+/* CARDS DE IMPACTO */
+.sobre-impacto {
+  padding: 80px 0;
+}
+
+.sobre-impacto h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.impacto-sub {
+  color: var(--texto-suave);
+  margin-bottom: 45px;
+}
+
+.impacto-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.impacto-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: var(--radius-custom);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.04); /* Sombra idêntica à da home */
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+.impacto-card:hover {
+  transform: translateY(-5px);
+}
+
+.impacto-card h3 {
+  color: var(--verde-bamburiti);
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.impacto-card p {
+  color: var(--texto-suave);
+  font-size: 15px;
+}
+
+/* CALL TO ACTION (CTA) */
+.sobre-cta {
+  padding: 40px 20px 80px 20px;
+}
+
+.cta-box {
+  max-width: 900px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #1e3932 0%, #0f241f 100%); /* Tom escuro elegante do rodapé */
+  color: white;
+  padding: 50px 40px;
+  border-radius: var(--radius-custom);
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.cta-box h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.cta-box p {
+  opacity: 0.9;
+  font-size: 16px;
+  max-width: 700px;
+  margin: 0 auto 20px auto;
+}
+
+.cta-highlight {
+  font-weight: bold;
+  color: #00ff7f; /* Um realce sutil para as redes/telefone */
+}
+
+.btn-contato {
+  background-color: var(--verde-bamburiti);
+  color: white;
+  border: none;
+  padding: 15px 35px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  margin-top: 15px;
+}
+
+.btn-contato:hover {
+  background-color: #008740;
+  transform: scale(1.03);
+}
+
+/* RESPONSIVIDADE (MOBILE-FIRST PRINCIPLE) */
+@media (max-width: 900px) {
+  .sobre-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .impacto-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sobre-hero h1 {
+    font-size: 32px;
+  }
+}

@@ -1,0 +1,154 @@
+/* Bikes.css - Layout Premium */
+
+.bikes-section {
+  padding: 100px 20px;
+  background-color: #fcfcfc;
+  text-align: center;
+}
+
+/* Título principal idêntico ao de Vantagens */
+.section-main-title {
+  font-family: 'Simplifica', sans-serif;
+  font-size: 36px;
+  color: #00A550; /* Mantendo seu verde de títulos */
+  margin-bottom: 60px;
+  font-weight: 700;
+}
+
+.bikes-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.bikes-grid {
+  display: grid;
+  /* Grid de 2 colunas que se ajusta automaticamente */
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 50px;
+}
+
+.bike-card-premium {
+  background: #ffffff;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s ease;
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.bike-card-premium:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+}
+
+/* Container da Imagem */
+.bike-image-box {
+  width: 100%;
+  height: 350px;
+  background-color: #f8f8f8; /* Fundo neutro para destacar a bike */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.bike-img-fluid {
+  max-width: 100%;
+  max-height: 100%;
+  /* Importante: Mostra a bike toda sem cortes */
+  object-fit: contain; 
+}
+
+/* Selo Sustentável */
+.badge-eco {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #A68059; /* Tom Craft */
+  color: #fff;
+  padding: 6px 15px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Info Box */
+.bike-content {
+  padding: 40px;
+  text-align: left;
+}
+
+.bike-model-name {
+  font-family: 'Simplifica', sans-serif;
+  color: #1a1a1a;
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.bike-description-text {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  min-height: 50px;
+}
+
+/* Rodapé do Card: Preço e Botão */
+.bike-footer-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 25px;
+}
+
+.price-tag {
+  color: #A68059; /* Marrom Craft para o preço */
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.btn-buy-now {
+  background-color: #00A550; /* Seu verde padrão */
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Simplifica', sans-serif;
+}
+
+.btn-buy-now:hover {
+  background-color: #008a49;
+  transform: scale(1.05);
+}
+
+/* Responsividade */
+@media (max-width: 1000px) {
+  .bikes-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bike-card-premium {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .bike-image-box {
+    height: 250px;
+  }
+  .bike-footer-price {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+}
