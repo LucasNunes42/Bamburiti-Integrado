@@ -8,11 +8,7 @@
 
 /* Título principal idêntico ao de Vantagens */
 .section-main-title {
-<<<<<<< HEAD
-  font-family: 'Simplifica', sans-serif;
-=======
  font-family: 'Inter', sans-serif;
->>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
   font-size: 36px;
   color: #00A550; /* Mantendo seu verde de títulos */
   margin-bottom: 60px;
@@ -87,11 +83,7 @@
 }
 
 .bike-model-name {
-<<<<<<< HEAD
-  font-family: 'Simplifica', sans-serif;
-=======
   font-family: 'Inter', sans-serif;
->>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
   color: #1a1a1a;
   font-size: 28px;
   margin-bottom: 12px;

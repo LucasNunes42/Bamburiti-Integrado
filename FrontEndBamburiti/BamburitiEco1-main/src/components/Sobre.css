@@ -145,21 +145,12 @@
 .cta-box {
   max-width: 900px;
   margin: 0 auto;
-<<<<<<< HEAD
-  background: linear-gradient(135deg, #1e3932 0%, #0f241f 100%); /* Tom escuro elegante do rodapé */
-  color: white;
-  padding: 50px 40px;
-  border-radius: var(--radius-custom);
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-=======
   background: linear-gradient(135deg, #1e3932 0%, #0f241f 100%);
   color: white;
-  padding: 70px 40px; /* 🆕 Aumentado para 70px em cima/baixo para manter o espaço perfeito */
+  padding: 70px 40px; 
   text-align: center;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   border-radius: var(--radius-custom);
->>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 }
 
 .cta-box h2 {
@@ -174,18 +165,12 @@
   margin: 0 auto 20px auto;
 }
 
-<<<<<<< HEAD
-.cta-highlight {
-  font-weight: bold;
-  color: #00ff7f; /* Um realce sutil para as redes/telefone */
-=======
 /* Garante um espaçamento confortável abaixo do último texto */
 .cta-highlight {
   font-weight: bold;
   color: #00ff7f; /* Tom verde brilhante para chamar atenção */
   margin-top: 25px;
   font-size: 17px;
->>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 }
 
 .btn-contato {

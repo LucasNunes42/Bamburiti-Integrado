@@ -12,16 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-<<<<<<< HEAD
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-=======
-import org.springframework.web.bind.annotation.DeleteMapping; // ADICIONADO
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable; // ADICIONADO
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
->>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +35,7 @@ public class PostController {
 	private PostRepository postRepository;
 
 	// Define a pasta onde as imagens ficarão salvas no servidor
-	private static String CAMINHO_IMAGENS = "uploads/";
+	private static final String CAMINHO_IMAGENS = "uploads/";
 
 	@GetMapping
 	public List<Post> listarTodos() {
@@ -49,17 +44,10 @@ public class PostController {
 
 	@PostMapping(value = "/com-foto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<Post> criarPostComFoto(
-<<<<<<< HEAD
-	    @RequestParam("titulo") String titulo,
-	    @RequestParam("conteudo") String conteudo,
-	    @RequestParam("autor") String autor,
-	    @RequestParam("arquivo") MultipartFile arquivo) {
-=======
 			@RequestParam("titulo") String titulo,
 			@RequestParam("conteudo") String conteudo,
 			@RequestParam("autor") String autor,
 			@RequestParam("arquivo") MultipartFile arquivo) {
->>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 
 		try {
 			// 1. Criar a pasta "uploads" caso não exista
@@ -82,6 +70,7 @@ public class PostController {
 			novoPost.setConteudo(conteudo);
 			novoPost.setAutor(autor);
 			novoPost.setDataPublicacao(LocalDateTime.now());
+			
 			// Guarda o caminho que o Frontend usará para carregar a foto
 			novoPost.setUrlImagem("/" + CAMINHO_IMAGENS + nomeArquivo);
 
@@ -94,8 +83,6 @@ public class PostController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-<<<<<<< HEAD
-=======
 
 	@PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<Post> atualizarPost(
@@ -113,8 +100,8 @@ public class PostController {
 
 				// Se o usuário enviou uma nova foto, atualiza o arquivo físico
 				if (arquivo != null && !arquivo.isEmpty()) {
-					// Remove a foto antiga se existir
-					if (postExistente.getUrlImagem() != null) {
+					// Remove a foto antiga se ela existir localmente
+					if (postExistente.getUrlImagem() != null && postExistente.getUrlImagem().startsWith("/")) {
 						String caminhoAntigo = postExistente.getUrlImagem().substring(1);
 						Files.deleteIfExists(Paths.get(caminhoAntigo));
 					}
@@ -122,9 +109,9 @@ public class PostController {
 					// Salva a nova foto
 					byte[] bytes = arquivo.getBytes();
 					String nomeArquivo = System.currentTimeMillis() + "_" + arquivo.getOriginalFilename();
-					Path caminho = Paths.get("uploads/" + nomeArquivo);
+					Path caminho = Paths.get(CAMINHO_IMAGENS + nomeArquivo);
 					Files.write(caminho, bytes);
-					postExistente.setUrlImagem("/uploads/" + nomeArquivo);
+					postExistente.setUrlImagem("/" + CAMINHO_IMAGENS + nomeArquivo);
 				}
 
 				postRepository.save(postExistente);
@@ -137,19 +124,17 @@ public class PostController {
 		}).orElse(ResponseEntity.notFound().build());
 	}
 
-	// --- NOVO MÉTODO DELETAR ADICIONADO AQUI ---
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletarPost(@PathVariable Long id) {
 		return postRepository.findById(id).map(post -> {
 			// Tenta apagar o arquivo físico se ele existir
-			if (post.getUrlImagem() != null) {
+			if (post.getUrlImagem() != null && post.getUrlImagem().startsWith("/")) {
 				try {
 					// Remove a barra inicial do caminho para bater com a pasta local
 					String caminhoLocal = post.getUrlImagem().substring(1);
 					Files.deleteIfExists(Paths.get(caminhoLocal));
 				} catch (IOException e) {
-					// Apenas um log caso dê erro ao apagar o arquivo físico, sem travar a deleção
-					// do banco
+					// Log caso dê erro ao apagar o arquivo físico, sem travar a deleção no banco
 					System.err.println("Não foi possível deletar o arquivo físico: " + e.getMessage());
 				}
 			}
@@ -158,5 +143,4 @@ public class PostController {
 			return ResponseEntity.noContent().<Void>build();
 		}).orElse(ResponseEntity.notFound().build());
 	}
->>>>>>> 6305f9a2e700f1c77ec4c00536b4d39bb4df468f
 }
