@@ -98,7 +98,13 @@ const Login = () => {
               </button>
             </div>
           </div>
-
+                {/* LINK DO ESQUECI A SENHA ENTRA AQUI */}
+          <div className="forgot-password-container">
+            <a href="/recuperar-senha" className="forgot-password-link">
+              Esqueceu a senha?
+            </a>
+          </div>
+          <div className="login-button-spacer"></div>
           <div className="login-button-spacer">
             <button type="submit" className="btn-atelier-login" disabled={loading}>
               {loading ? "ENTRANDO..." : "ENTRAR"}

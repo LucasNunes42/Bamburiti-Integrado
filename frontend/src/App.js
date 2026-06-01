@@ -8,13 +8,17 @@ import PostList from './components/PostList';
 import PostDetails from './components/PostDetails';
 import Login from './components/Login';
 import Sobre from './components/Sobre';
-import AdminDashboard from './components/AdminDashboard'; // 🆕 Importação do novo Painel Central
+import AdminDashboard from './components/AdminDashboard'; 
 
 // Componentes da Home 
 import Carousel from "./components/Carousel";
 import Vantagens from './components/Vantagens';
 import BikeSharing from './components/BikeSharing';
 import Bikes from './components/Bikes';
+
+// Para a tela de redefinição de senha
+import RecuperarSenha from './components/RecuperarSenha';
+import NovaSenha from './components/NovaSenha';
 
 // Estilo Global
 import "./assets/style.css";
@@ -47,7 +51,11 @@ function App() {
 
           {/* ⚙️ ROTA CENTRAL DO ADMINISTRADOR */}
           <Route path="admin" element={<AdminDashboard />} />
-
+          
+          {/* ✅ CORREÇÃO: Removida a barra '/' para alinhar como rota relativa filha */}
+          <Route path="recuperar-senha" element={<RecuperarSenha />} /> 
+          <Route path="nova-senha" element={<NovaSenha />} />
+          
         </Route>
       </Routes>
     </BrowserRouter>

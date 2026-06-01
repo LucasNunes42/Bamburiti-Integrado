@@ -207,3 +207,23 @@
     font-size: 16px;
   }
 }
+/* --- LINK PARA O "ESQUECI A SENHA" --- */
+.forgot-password-container {
+  display: flex;
+  justify-content: flex-end; /* Alinha à direita */
+  margin-top: -15px; /* Puxa para perto do input de senha */
+  margin-bottom: 10px;
+}
+
+.forgot-password-link {
+  font-size: 12px;
+  color: var(--craft-miv);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+  color: var(--verde-miv);
+  text-decoration: underline;
+}

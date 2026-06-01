@@ -47,6 +47,10 @@ public class SecurityConfig {
 					req.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll();
 					req.requestMatchers("/api/leads/**").permitAll();
 					req.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll();
+					
+					// Para a redefinicao de senha
+					req.requestMatchers(HttpMethod.POST, "/api/auth/forgot-password").permitAll();
+					req.requestMatchers(HttpMethod.POST, "/api/auth/reset-password").permitAll();
 
 					// 🔓 Qualquer visitante pode ler os posts do Blog e ver imagens
 					req.requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll();

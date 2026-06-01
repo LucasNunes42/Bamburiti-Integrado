@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; //  Importação dos ícones padrão
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Importação dos ícones padrão
 import './Register.css';
 
 const Register = () => {
@@ -7,11 +7,15 @@ const Register = () => {
     usuario: '',
     email: '',
     senha: '',
+    confirmaSenha: '', // 🆕 Novo campo adicionado ao estado
     termos: false
   });
 
   const [loading, setLoading] = useState(false);
+  
+  // 🆕 Estados independentes para exibir/ocultar cada senha (Iniciam como false = ocultos)
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const validarSenhaForte = (senha, usuario) => {
     const senhasProibidas = ["123", "1234", "123456", "abcdef", "mudar123", "senha"];
@@ -40,6 +44,13 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 🆕 VALIDAÇÃO 1: Verifica se as senhas coincidem ANTES de qualquer coisa
+    if (formData.senha !== formData.confirmaSenha) {
+      alert("As senhas não coincidem. Por favor, verifique e digite novamente.");
+      return;
+    }
+
+    // VALIDAÇÃO 2: Força da senha
     const erroSenha = validarSenhaForte(formData.senha, formData.usuario);
     if (erroSenha) {
       alert(erroSenha);
@@ -62,8 +73,10 @@ const Register = () => {
 
       if (response.ok) {
         alert("Conta criada com sucesso no ecossistema!");
-        setFormData({ usuario: '', email: '', senha: '', termos: false });
+        // Limpa todos os campos
+        setFormData({ usuario: '', email: '', senha: '', confirmaSenha: '', termos: false });
         setShowPassword(false);
+        setShowConfirmPassword(false);
       } else {
         const mensagemErro = await response.text();
         alert(`Erro no cadastro: ${mensagemErro || 'Tente novamente.'}`);
@@ -130,6 +143,27 @@ const Register = () => {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+          </div>
+
+          {/* 🆕 NOVO CAMPO: CONFIRMAR SENHA */}
+          <div className="atelier-input-group">
+            <label>CONFIRMAR SENHA</label>
+            <div className="senha-input-container">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="••••••••"
+                required
+                value={formData.confirmaSenha}
+                onChange={(e) => setFormData({ ...formData, confirmaSenha: e.target.value })}
+              />
+              <button
+                type="button"
+                className="btn-olho-senha"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
           </div>
