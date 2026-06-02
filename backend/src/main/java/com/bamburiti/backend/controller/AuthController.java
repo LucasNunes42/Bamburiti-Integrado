@@ -1,8 +1,8 @@
 package com.bamburiti.backend.controller;
 
 import jakarta.validation.Valid;
-import java.time.LocalDateTime;
-import java.util.Map;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,7 @@ import com.bamburiti.backend.model.Usuario;
 import com.bamburiti.backend.repository.PasswordResetTokenRepository;
 import com.bamburiti.backend.repository.UsuarioRepository;
 import com.bamburiti.backend.security.TokenService;
+import org.springframework.beans.factory.annotation.Value;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -46,21 +47,24 @@ public class AuthController {
     @Autowired
     private PasswordResetTokenRepository tokenRepository;
 
+    // 🔑 Injeta o e-mail do remetente configurado nas propriedades
+    @Value("${spring.mail.username}")
+    private String emailRemetente;
+
     @PostMapping("/login")
-    public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
+    public ResponseEntity<?> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
         var token = new UsernamePasswordAuthenticationToken(dados.email(), dados.senha());
         var authentication = manager.authenticate(token);
 
-        // ✅ CORREÇÃO DO ERRO 1: Garante o mapeamento do objeto autenticado para a sua classe Usuario
         Usuario usuarioLogado = (Usuario) authentication.getPrincipal();
-
         var tokenJWT = tokenService.gerarToken(usuarioLogado);
 
         return ResponseEntity.ok(new DadosTokenJWT(tokenJWT, usuarioLogado.getTipoUsuario()));
     }
 
     @PostMapping("/registrar")
-    public ResponseEntity registrarConta(@RequestBody @Valid DadosAutenticacao dados) {
+    @Transactional
+    public ResponseEntity<?> registrarConta(@RequestBody @Valid DadosAutenticacao dados) {
         if (repository.findByEmail(dados.email()) != null) {
             return ResponseEntity.badRequest().body("E-mail já cadastrado no sistema!");
         }
@@ -70,7 +74,7 @@ public class AuthController {
         novoUsuario.setSenha(passwordEncoder.encode(dados.senha()));
         novoUsuario.setTipoUsuario("USER"); 
         novoUsuario.setEstaLogado(false);
-        novoUsuario.setDataCadastro(LocalDateTime.now()); 
+        // ✂️ REMOVIDO: novoUsuario.setDataCadastro(...) -> O Hibernate gerencia automaticamente via @CreationTimestamp
 
         repository.save(novoUsuario);
         return ResponseEntity.ok().body("Conta criada com sucesso!");
@@ -78,18 +82,21 @@ public class AuthController {
 
     @PostMapping("/forgot-password")
     @Transactional
-    public ResponseEntity<?> forgotPassword(@RequestBody Map<String, String> request) {
-        String email = request.get("email");
+    public ResponseEntity<?> forgotPassword(@RequestBody @Valid DadosSolicitacaoToken dados) {
+        String email = dados.email();
+        System.out.println("======> E-mail recebido do React: " + email);
         
-        // 🛠️ CORREÇÃO: Adicionado o (Usuario) para converter o UserDetails que o repository retorna
         Usuario usuario = (Usuario) repository.findByEmail(email);
         
         if (usuario == null) {
+            System.out.println("======> ALERTA: Usuário NÃO foi encontrado no banco de dados!");
             return ResponseEntity.ok("Se o e-mail existir no sistema, as instruções foram enviadas.");
         }
+
+        System.out.println("======> Sucesso: Usuário encontrado! ID: " + usuario.getIdUsuario());
         
-        // Utilizando getIdUsuario() que está mapeado na sua classe Usuario
         tokenRepository.deleteByUsuarioIdUsuario(usuario.getIdUsuario());
+        
         String token = UUID.randomUUID().toString();
         PasswordResetToken resetToken = new PasswordResetToken(token, usuario);
         tokenRepository.save(resetToken);
@@ -97,6 +104,10 @@ public class AuthController {
         String linkRecuperacao = "http://localhost:3000/nova-senha?token=" + token;
         
         SimpleMailMessage message = new SimpleMailMessage();
+        
+        // 🛠️ É AQUI que deve colocar a injeção da variável ou o setFrom correspondente:
+        message.setFrom(emailRemetente); 
+        
         message.setTo(usuario.getEmail());
         message.setSubject("Bamburiti - Recuperação de Senha");
         message.setText("Olá!\n\nRecebemos uma solicitação para redefinir a senha da sua conta no sistema Bamburiti.\n"
@@ -109,27 +120,43 @@ public class AuthController {
     }
     @PostMapping("/reset-password")
     @Transactional
-    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> request) {
-        String token = request.get("token");
-        String novaSenha = request.get("novaSenha");
-
-        var tokenOpt = tokenRepository.findByToken(token);
+    public ResponseEntity<?> resetPassword(@RequestBody @Valid DadosRedefinicaoSenha dados) {
+        var tokenOpt = tokenRepository.findByToken(dados.token());
         if (tokenOpt.isEmpty()) {
             return ResponseEntity.badRequest().body("Token de recuperação inválido ou inexistente.");
         }
 
         PasswordResetToken resetToken = tokenOpt.get();
 
-        if (resetToken.getDataExpiracao().isBefore(LocalDateTime.now())) {
+        if (resetToken.getDataExpiracao().isBefore(java.time.LocalDateTime.now())) {
             tokenRepository.delete(resetToken);
             return ResponseEntity.badRequest().body("Este link de recuperação já expirou. Solicite um novo.");
         }
 
         Usuario usuario = resetToken.getUsuario();
-        usuario.setSenha(passwordEncoder.encode(novaSenha));
+        usuario.setSenha(passwordEncoder.encode(dados.novaSenha()));
         repository.save(usuario);
 
+        // Deleta o token após o uso para que ele não possa ser reutilizado
         tokenRepository.delete(resetToken);
         return ResponseEntity.ok("Senha alterada com sucesso!");
     }
 }
+
+// =========================================================================
+// 📄 DTOs (Records) Auxiliares para validação das requisições de senha
+// =========================================================================
+
+record DadosSolicitacaoToken(
+    @NotBlank(message = "O e-mail é obrigatório")
+    @Email(message = "Formato de e-mail inválido")
+    String email
+) {}
+
+record DadosRedefinicaoSenha(
+    @NotBlank(message = "O token é obrigatório")
+    String token,
+    
+    @NotBlank(message = "A nova senha não pode estar em branco")
+    String novaSenha
+) {}

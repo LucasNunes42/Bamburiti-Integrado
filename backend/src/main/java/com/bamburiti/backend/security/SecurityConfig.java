@@ -1,5 +1,6 @@
 package com.bamburiti.backend.security;
 
+import org.springframework.security.config.Customizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,50 +34,53 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 )
 public class SecurityConfig {
 
-	@Autowired
-	private SecurityFilter securityFilter;
+    @Autowired
+    private SecurityFilter securityFilter;
 
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http
-				.csrf(csrf -> csrf.disable())
-				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(req -> {
-					// 🔓 Rotas Públicas (Autenticação, Leads e Documentação)
-					req.requestMatchers(HttpMethod.POST, "/api/auth/registrar").permitAll();
-					req.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll();
-					req.requestMatchers("/api/leads/**").permitAll();
-					req.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll();
-					
-					// Para a redefinicao de senha
-					req.requestMatchers(HttpMethod.POST, "/api/auth/forgot-password").permitAll();
-					req.requestMatchers(HttpMethod.POST, "/api/auth/reset-password").permitAll();
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .cors(Customizer.withDefaults()) // Habilita o CORS integrado com a segurança do Spring
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(req -> {
+                    // 🔓 Rotas Públicas (Autenticação, Leads e Documentação)
+                    req.requestMatchers(HttpMethod.POST, "/api/auth/registrar").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll();
+                    
+                    req.requestMatchers("/api/leads/**").permitAll();
+                    req.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll();
+                    
+                    // 🔓 Recuperação de senha
+                    req.requestMatchers(HttpMethod.POST, "/api/auth/forgot-password").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/api/auth/reset-password").permitAll();
 
-					// 🔓 Qualquer visitante pode ler os posts do Blog e ver imagens
-					req.requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll();
-					req.requestMatchers("/uploads/**").permitAll();
+                    // 🔓 Qualquer visitante pode ler os posts do Blog e ver imagens
+                    req.requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll();
+                    req.requestMatchers("/uploads/**").permitAll();
 
-					// 🔐 Tranca do Administrador (Exige a autoridade "ADMIN")
-					req.requestMatchers("/admin", "/admin/**", "/api/admin/**").hasRole("ADMIN");
-					req.requestMatchers(HttpMethod.POST, "/api/posts/com-foto").hasRole("ADMIN");
-					req.requestMatchers(HttpMethod.PUT, "/api/posts/**").hasRole("ADMIN"); 
-					req.requestMatchers(HttpMethod.DELETE, "/api/posts/**").hasRole("ADMIN");
-					req.requestMatchers("/api/usuarios", "/api/usuarios/**").hasRole("ADMIN");
+                    // 🔐 Tranca do Administrador (Usa hasAuthority para bater exatamente com "ADMIN")
+                    req.requestMatchers(HttpMethod.POST, "/api/posts/com-foto").hasAuthority("ADMIN");
+                    req.requestMatchers(HttpMethod.PUT, "/api/posts/**").hasAuthority("ADMIN"); 
+                    req.requestMatchers(HttpMethod.DELETE, "/api/posts/**").hasAuthority("ADMIN");
+                    
+                    // Bloqueia todas as rotas de gerenciamento de usuários para não-admins
+                    req.requestMatchers("/api/usuarios/**").hasAuthority("ADMIN");
 
-					// 🔒 Qualquer outra requisição exige autenticação genérica
-					req.anyRequest().authenticated();
-				})
-				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-				.build();
-	}
+                    // 🔒 Qualquer outra requisição exige autenticação genérica (USER ou ADMIN)
+                    req.anyRequest().authenticated();
+                })
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+    }
 
-	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-		return configuration.getAuthenticationManager();
-	}
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

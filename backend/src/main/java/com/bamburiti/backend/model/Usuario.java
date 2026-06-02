@@ -24,12 +24,17 @@ public class Usuario implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUsuario;
 
+	// ✅ CORREÇÃO: Força o e-mail a ser único no banco e nunca nulo
+	@Column(nullable = false, unique = true, length = 180)
 	private String email; 
+
+	// ✅ CORREÇÃO: Impede que a senha seja salva em branco
+	@Column(nullable = false)
 	private String senha;
+
 	private String ultimoLogin;
 	private Boolean estaLogado;
 	private String tipoUsuario;
-
 	@CreationTimestamp
 	@Column(name = "data_cadastro", nullable = false, updatable = false)
 	private LocalDateTime dataCadastro;
@@ -96,10 +101,12 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// Retorna a autoridade baseada no seu campo 'tipoUsuario'
+		// Retorna a autoridade exata baseada no campo 'tipoUsuario'
 		// Se tipoUsuario for nulo, define como USER por padrão
 		String role = (tipoUsuario != null) ? tipoUsuario : "USER";
-		return List.of(new SimpleGrantedAuthority("ROLE_" + role));
+		
+		// ✅ CORREÇÃO: Removido o "ROLE_", agora retorna exatamente "ADMIN" ou "USER"
+		return List.of(new SimpleGrantedAuthority(role));
 	}
 
 	@Override

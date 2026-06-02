@@ -30,18 +30,30 @@ const Login = () => {
         })
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        
-        // 🔑 Salva o Token JWT no navegador para as próximas requisições!
-        localStorage.setItem('token', data.token);
-        
-        alert("Login efetuado com sucesso!");
-        navigate('/'); // Redireciona para a Home
-        
-      } else {
-        alert("E-mail ou senha incorretos. Tente novamente.");
-      }
+     if (response.ok) {
+    const data = await response.json();
+    
+    // 🔑 Salva o Token JWT no navegador para as próximas requisições!
+    localStorage.setItem('token', data.token);
+    
+    // 🏷️ A CORREÇÃO: Salva o cargo (ADMIN/USER) que o seu Back-end retorna no login
+    // (Ajuste para data.role ou data.tipoUsuario dependendo de como o seu DTO foi mapeado no Java)
+    const cargoUsuario = data.tipoUsuario || data.role || 'USER';
+    localStorage.setItem('role', cargoUsuario);
+    
+    alert("Login efetuado com sucesso!");
+    
+    // 🔀 Redirecionamento Inteligente:
+    if (cargoUsuario === 'ADMIN') {
+        navigate('/admin'); // Admin vai direto para o Painel de Controle
+    } else {
+        navigate('/'); // Usuário comum vai para a página inicial
+    }
+    
+    } else {
+    alert("E-mail ou senha incorretos. Tente novamente.");
+    }
+
     } catch (error) {
       console.error("Erro na requisição:", error);
       alert("Não foi possível conectar ao servidor. O seu Spring Boot está rodando?");

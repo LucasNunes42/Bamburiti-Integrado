@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
 import Register from './components/Register';
 
+import ProtectedRoute from './components/ProtectedRoute';
+
 // IMPORTAÇÕES (Ajustadas para a versão final da Sprint 4)
 import PostList from './components/PostList';
 import PostDetails from './components/PostDetails';
@@ -49,8 +51,15 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="sobre" element={<Sobre />} />
 
-          {/* ⚙️ ROTA CENTRAL DO ADMINISTRADOR */}
-          <Route path="admin" element={<AdminDashboard />} />
+          {/* ⚙️ ROTA CENTRAL DO ADMINISTRADOR PROTEGIDA */}
+          <Route 
+            path="admin" 
+            element={
+              <ProtectedRoute roleRequired="ADMIN">
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
           
           {/* ✅ CORREÇÃO: Removida a barra '/' para alinhar como rota relativa filha */}
           <Route path="recuperar-senha" element={<RecuperarSenha />} /> 
