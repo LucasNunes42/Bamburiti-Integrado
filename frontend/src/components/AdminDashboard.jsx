@@ -24,9 +24,10 @@ const AdminDashboard = () => {
   // Campos Usuário
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [tipoUsuario, setTipoUsuario] = useState('USER');
+  const [tipoUsuario, setTipoUsuario] = useState('USER'); // Estado do formulário
 
   const token = localStorage.getItem('token'); 
+  const tipoUsuarioLogado = localStorage.getItem('tipoUsuario'); // 👈 Variável renomeada para evitar conflito
 
   // 🛡️ Função para descobrir o e-mail do Administrador logado atualmente através do JWT
   const obterEmailLogado = () => {
@@ -221,6 +222,18 @@ const AdminDashboard = () => {
     user.tipoUsuario?.toLowerCase().includes(busca.toLowerCase())
   );
 
+  // 🛡️ GUARDA DE ROTA: Posicionado AQUI, após todos os hooks do React, para evitar crash.
+  if (!token || tipoUsuarioLogado !== 'ADMIN') {
+    return (
+      <div className="acesso-negado-container">
+        <h2>🚫 Acesso Negado</h2>
+        <p>Você não tem permissão para acessar o ecossistema administrativo da Bamburiti.</p>
+        <a href="/login" className="acesso-negado-link">Ir para o Login</a>
+      </div>
+    );
+  }
+
+  // Se passou da guarda de rota, renderiza o painel normalmente
   return (
     <div className="admin-dashboard-container">
       <div className="admin-sidebar">

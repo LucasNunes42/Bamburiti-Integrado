@@ -5,7 +5,7 @@ import fotoVitor from '../assets/img/vitor-bamburiti.jpg'; // 🆕 Sua nova imag
 export default function Sobre() {
   return (
     <div className="sobre-container">
-      
+
       {/* SEÇÃO 1: HERO / INTRODUÇÃO */}
       <section className="sobre-hero">
         <div className="sobre-content-wrapper">
@@ -49,7 +49,7 @@ export default function Sobre() {
           <p className="impacto-sub">
             Nosso diferencial está na capacidade de transformar e inovar através de um elemento fundamental: o bambu.
           </p>
-          
+
           <div className="impacto-cards-grid">
             <div className="impacto-card">
               <h3>Resistência de Aço</h3>
@@ -80,7 +80,7 @@ export default function Sobre() {
           </p>
           {/* 🆕 Texto atualizado orientando sobre o ChatBot */}
           <p className="cta-highlight">
-            Clique no botão no canto inferior direito da tela e fale conosco!
+            Clique do botão no canto inferior direito da tela e fale conosco!
           </p>
         </div>
       </section>

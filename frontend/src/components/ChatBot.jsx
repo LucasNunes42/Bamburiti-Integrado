@@ -71,7 +71,7 @@ const ChatBot = () => {
       {!isOpen && (
         <button className="atelier-trigger-pill" onClick={toggleChat}>
           <FaLeaf className="leaf-icon-pill" />
-          <span className="pill-label">CONSULTORIA</span>
+          <span className="pill-label">FALE CONOSCO</span>
         </button>
       )}
 
@@ -82,16 +82,16 @@ const ChatBot = () => {
         <div className="panel-header">
           <span className="step-indicator">PASSO 0{step} / 04</span>
           <h2>Bamburiti</h2>
-          <p>Ateliê de Bioestruturas</p>
+          <p></p>
           <div className="header-line"></div>
         </div>
 
         <div className="panel-content">
           {step === 1 && (
             <div className="step-fade">
-              <h3>Bem-vindo ao Ateliê.</h3>
+              <h3>Bem-vindo(a).</h3>
               <p className="description-text">
-                Inicie um diálogo sobre seu projeto personalizado. Unimos a inteligência do bambu com a precisão da engenharia moderna.
+                Inicie um diálogo sobre seu projeto personalizado.
               </p>
               <button className="btn-atelier-action" onClick={() => setStep(2)}>
                 INICIAR DIÁLOGO <FaArrowRight />
@@ -123,7 +123,7 @@ const ChatBot = () => {
                   value={form.mensagem} onChange={e => setForm({...form, mensagem: e.target.value})}></textarea>
               </div>
               <button type="submit" className="btn-atelier-send" disabled={loading}>
-                {loading ? "PROCESSANDO..." : "ENVIAR AO ATELIÊ"}
+                {loading ? "PROCESSANDO..." : "ENVIAR"}
                 {!loading && <FaPaperPlane style={{marginLeft: '10px'}} />}
               </button>
             </form>
@@ -133,7 +133,7 @@ const ChatBot = () => {
             <div className="step-fade success-view">
               <div className="success-circle"><FaCheck /></div>
               <h3>Mensagem Recebida.</h3>
-              <p className="description-text">Obrigado, {form.nome}. Seus dados foram encaminhados ao nosso Ateliê de Bioestruturas.</p>
+              <p className="description-text">Obrigado, {form.nome}. Seus dados foram encaminhados à nossa equipe.</p>
               {/* BOTÃO CONCLUÍDO TAMBÉM RESETA */}
               <button className="btn-atelier-close" onClick={resetChat}>CONCLUÍDO</button>
             </div>

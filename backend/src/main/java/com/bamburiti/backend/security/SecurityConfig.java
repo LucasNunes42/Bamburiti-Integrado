@@ -21,45 +21,36 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 @Configuration
 @EnableWebSecurity
-@OpenAPIDefinition(
-    info = @Info(title = "Bamburiti API", version = "v1"), 
-    security = @SecurityRequirement(name = "bearerAuth")
-)
-@SecurityScheme(
-    name = "bearerAuth", 
-    type = SecuritySchemeType.HTTP, 
-    scheme = "bearer", 
-    bearerFormat = "JWT"
-)
+@OpenAPIDefinition(info = @Info(title = "Bamburiti API", version = "v1"), security = @SecurityRequirement(name = "bearerAuth"))
+@SecurityScheme(name = "bearerAuth", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")
 public class SecurityConfig {
-
 	@Autowired
 	private SecurityFilter securityFilter;
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http
-				.csrf(csrf -> csrf.disable())
+		return http.csrf(csrf -> csrf.disable())
 				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(req -> {
-					// 🔓 Rotas Públicas (Autenticação, Leads e Documentação)
 					req.requestMatchers(HttpMethod.POST, "/api/auth/registrar").permitAll();
 					req.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll();
 					req.requestMatchers("/api/leads/**").permitAll();
 					req.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll();
 
-					// 🔓 Qualquer visitante pode ler os posts do Blog e ver imagens
+					// 🔓 Qualquer visitante pode ler os posts do Blog
 					req.requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll();
 					req.requestMatchers("/uploads/**").permitAll();
 
-					// 🔐 Tranca do Administrador (Exige a autoridade "ADMIN")
-					req.requestMatchers("/admin", "/admin/**", "/api/admin/**").hasRole("ADMIN");
+					// 🔐 TRANCA DO ADMINISTRADOR (Exige a autoridade exata "ADMIN")
+                    // Adicionamos as rotas literais de admin para que usuários comuns sejam barrados aqui
+                    req.requestMatchers("/admin", "/admin/**", "/api/admin/**").hasRole("ADMIN");
+
+					// 🔐 Bloqueios do Administrador (Exige o Token JWT com perfil ADMIN)
 					req.requestMatchers(HttpMethod.POST, "/api/posts/com-foto").hasRole("ADMIN");
 					req.requestMatchers(HttpMethod.PUT, "/api/posts/**").hasRole("ADMIN"); 
 					req.requestMatchers(HttpMethod.DELETE, "/api/posts/**").hasRole("ADMIN");
 					req.requestMatchers("/api/usuarios", "/api/usuarios/**").hasRole("ADMIN");
 
-					// 🔒 Qualquer outra requisição exige autenticação genérica
 					req.anyRequest().authenticated();
 				})
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

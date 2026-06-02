@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
 import Register from './components/Register';
 
-// IMPORTAÇÕES (Ajustadas para a versão final da Sprint 4)
+// IMPORTAÇÕES
 import PostList from './components/PostList';
 import PostDetails from './components/PostDetails';
 import Login from './components/Login';
@@ -33,7 +33,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Tudo o que estiver dentro de MainLayout ganha Header e Footer automaticamente! */}
         <Route path="/" element={<MainLayout />}>
 
           <Route index element={<Home />} />
@@ -46,6 +45,7 @@ function App() {
           <Route path="sobre" element={<Sobre />} />
 
           {/* ⚙️ ROTA CENTRAL DO ADMINISTRADOR */}
+          {/* Substitui a rota antiga isolada "admin/novo-post" por esta completa */}
           <Route path="admin" element={<AdminDashboard />} />
 
         </Route>

@@ -147,7 +147,7 @@
   margin: 0 auto;
   background: linear-gradient(135deg, #1e3932 0%, #0f241f 100%);
   color: white;
-  padding: 70px 40px; 
+  padding: 70px 40px; /* 🆕 Aumentado para 70px em cima/baixo para manter o espaço perfeito */
   text-align: center;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   border-radius: var(--radius-custom);

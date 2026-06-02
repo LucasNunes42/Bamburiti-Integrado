@@ -9,30 +9,30 @@ function Header() {
   const [menuMobile, setMenuMobile] = useState(false); // Menu hambúrguer
   const navigate = useNavigate();
 
-  // 🔐 VERIFICAÇÃO DE LOGIN NO NAVEGADOR
+  // VERIFICAÇÃO DE LOGIN ESTADO ATUAL
   const isLogged = !!localStorage.getItem('token');
   const tipoUsuario = localStorage.getItem('tipoUsuario');
 
   const handleNavigation = (path) => {
     navigate(path);
     setOpenAccount(false);
-    setMenuMobile(false); // Fecha o menu ao navegar
+    setMenuMobile(false); 
   };
 
-  // 🚪 FUNÇÃO PARA FAZER LOGOUT
+  // FUNÇÃO PARA FAZER LOGOUT (Limpa o armazenamento)
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('tipoUsuario');
     setOpenAccount(false);
     setMenuMobile(false);
-    navigate('/'); // Manda de volta para a Home
+    navigate('/');
   };
 
   return (
     <header className="main-header">
       <div className="header-container">
 
-        {/* HAMBÚRGUER (Aparece apenas no Mobile via CSS) */}
+        {/* HAMBÚRGUER */}
         <div className="mobile-menu-icon" onClick={() => setMenuMobile(!menuMobile)}>
           {menuMobile ? <FaTimes /> : <FaBars />}
         </div>
@@ -44,7 +44,7 @@ function Header() {
           </Link>
         </div>
 
-        {/* CENTRO - Menu (Ganha a classe 'active' no Mobile) */}
+        {/* CENTRO - Menu */}
         <nav className={`header-center ${menuMobile ? 'active' : ''}`}>
           <ul className="header-menu">
             <li><Link to="/" onClick={() => setMenuMobile(false)}>Home</Link></li>

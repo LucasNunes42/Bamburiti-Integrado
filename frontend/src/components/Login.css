@@ -7,6 +7,13 @@
   --font-simplifica: 'Simplifica', sans-serif;
 }
 
+/* Aplicando box-sizing global para evitar que paddings quebrem layouts */
+.atelier-login-wrapper,
+.atelier-login-card,
+.atelier-input-group input {
+  box-sizing: border-box;
+}
+
 .atelier-login-wrapper {
   display: flex;
   justify-content: center;
@@ -14,7 +21,6 @@
   min-height: 100vh;
   background: var(--bg-atelie);
   padding: 60px 20px;
-  box-sizing: border-box;
 }
 
 .atelier-login-card {
@@ -22,11 +28,10 @@
   padding: 60px 50px;
   border-radius: 20px;
   width: 100%;
-  max-width: 450px;
+  max-width: 450px; /* Mantido o seu tamanho mais elegante */
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(166, 128, 89, 0.2);
   position: relative;
-  box-sizing: border-box;
 }
 
 /* HEADER ESTILO ATELIÊ */
@@ -88,7 +93,7 @@
 }
 
 .atelier-input-group input {
-  width: 100%;
+  width: 100%; /* Força ambos os inputs (e-mail e senha) a terem a mesma largura */
   padding: 12px 0;
   border: none;
   border-bottom: 1.5px solid #eee;
@@ -96,7 +101,6 @@
   font-size: 16px;
   transition: 0.3s;
   border-radius: 0;
-  box-sizing: border-box;
 }
 
 .atelier-input-group input:focus {
@@ -104,6 +108,48 @@
   border-bottom-color: var(--verde-miv);
 }
 
+/* ESTRUTURA DO BOTÃO DE MOSTRAR SENHA */
+.senha-input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Impede que o texto longo da senha fique por baixo do ícone do olho */
+.senha-input-container input {
+  padding-right: 35px !important;
+}
+
+.btn-olho-senha {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none !important;
+  border: none !important;
+  outline: none !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  color: #666; 
+  opacity: 0.9; 
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.btn-olho-senha:hover {
+  color: var(--verde-miv); 
+}
+
+.btn-olho-senha svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* BOTÃO DE LOGIN */
 .btn-atelier-login {
   width: 100%;
   background: var(--verde-miv);
@@ -139,47 +185,6 @@
 
 .login-footer-atelier a:hover {
   text-decoration: underline;
-}
-
-
-.senha-input-container {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-/* Garante que o texto digitado não fique embaixo do olho no campo minimalista */
-.senha-input-container input {
-  padding-right: 35px !important;
-}
-
-.btn-olho-senha {
-  position: absolute;
-  right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none !important;
-  border: none !important;
-  outline: none !important;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
-  color: #666; 
-  opacity: 0.9; 
-  transition: opacity 0.2s ease, color 0.2s ease;
-}
-
-.btn-olho-senha:hover {
-  color: var(--verde-miv); 
-}
-
-.btn-olho-senha svg {
-  width: 18px;
-  height: 18px;
 }
 
 /* --- REGRAS DE RESPONSIVIDADE (MOBILE) --- */

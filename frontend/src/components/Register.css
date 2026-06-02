@@ -7,6 +7,14 @@
   --font-simplifica: 'Simplifica', sans-serif;
 }
 
+/* Normalização para evitar que paddings deformem o tamanho dos componentes */
+.atelier-register-wrapper,
+.atelier-register-card,
+.atelier-input-group input,
+.senha-input-container input {
+  box-sizing: border-box;
+}
+
 .atelier-register-wrapper {
   display: flex;
   justify-content: center;
@@ -21,7 +29,7 @@
   padding: 60px 50px;
   border-radius: 20px;
   width: 100%;
-  max-width: 480px;
+  max-width: 480px; /* Mantido o seu tamanho original para o Register */
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(166, 128, 89, 0.2);
   position: relative;
@@ -88,6 +96,7 @@
 }
 
 .atelier-input-group input {
+  width: 100%; /* Garante que os inputs normais ocupem toda a largura */
   padding: 12px 0;
   border: none;
   border-bottom: 1.5px solid #eee;
@@ -102,6 +111,7 @@
   border-bottom-color: var(--verde-miv);
 }
 
+/* CHECKBOX */
 .atelier-checkbox-label {
   display: flex;
   align-items: center;
@@ -118,6 +128,7 @@
   height: 16px;
 }
 
+/* BOTÃO DE REGISTRO */
 .btn-atelier-register {
   width: 100%;
   background: var(--verde-miv);
@@ -138,6 +149,7 @@
   background: var(--dark-miv);
 }
 
+/* Feedback visual excelente adicionado pelo colega enquanto a requisição carrega */
 .btn-atelier-register:disabled {
   background-color: #9e9e9e;
   cursor: not-allowed;
@@ -151,11 +163,16 @@
 }
 
 .register-footer-atelier a {
+  color: var(--verde-miv);
   text-decoration: none;
   font-weight: bold;
 }
 
-/* --- RECURSO DO OLHINHO DE SENHA (Da versão Local) --- */
+.register-footer-atelier a:hover {
+  text-decoration: underline;
+}
+
+/* --- RECURSO DO OLHINHO DE SENHA --- */
 .senha-input-container {
   position: relative;
   width: 100%;
@@ -163,6 +180,7 @@
   align-items: center;
 }
 
+/* Mantém o input de senha em 100% e evita que o texto fique sob o ícone */
 .senha-input-container input {
   padding-right: 45px !important;
   width: 100%;
@@ -184,11 +202,12 @@
   margin: 0;
   color: #666; 
   opacity: 0.9; 
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, color 0.2s ease;
 }
 
 .btn-olho-senha:hover {
   opacity: 1;
+  color: var(--verde-miv);
 }
 
 .btn-olho-senha svg {
@@ -196,7 +215,7 @@
   height: 18px;
 }
 
-/* --- REGRAS DE RESPONSIVIDADE MOBILE (Da versão Remota) --- */
+/* --- REGRAS DE RESPONSIVIDADE (MOBILE) --- */
 @media (max-width: 768px) {
   .atelier-register-wrapper {
     padding: 30px 15px;
@@ -230,4 +249,15 @@
   .register-subtitle-atelier {
     font-size: 10px;
   }
+}
+
+.atelier-checkbox-label a.termos-link {
+  color: var(--verde-miv);
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 4px; /* Dá um pequeno espaço após a palavra 'os' */
+}
+
+.atelier-checkbox-label a.termos-link:hover {
+  text-decoration: underline;
 }

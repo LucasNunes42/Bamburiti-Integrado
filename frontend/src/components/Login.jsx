@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Ícones importados seguindo a estrutura do site
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Ícones mantidos do Código 2
 import './Login.css';
 
 const Login = () => {
@@ -10,10 +9,9 @@ const Login = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // Estado para alternar a visibilidade da senha
-  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false); // Estado para alternar a visibilidade mantido do Código 2
 
-  // 🔌 FUNÇÃO QUE CONECTA COM O LOGIN DO SPRING BOOT
+  // 🔌 FUNÇÃO QUE CONECTA COM O LOGIN DO SPRING BOOT (Sua lógica do Código 1)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -32,13 +30,18 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        
-        // 🔑 Salva o Token JWT no navegador para as próximas requisições!
+
+        // 🔑 Salva o Token JWT
         localStorage.setItem('token', data.token);
-        
+
+        // 🆕 Salva o tipo do usuário (Código 1)
+        localStorage.setItem('tipoUsuario', data.tipoUsuario || 'ADMIN');
+
         alert("Login efetuado com sucesso!");
-        navigate('/'); // Redireciona para a Home
-        
+
+        // 🆕 Redireciona forçando um recarregamento da página (Código 1)
+        window.location.href = '/';
+
       } else {
         alert("E-mail ou senha incorretos. Tente novamente.");
       }
@@ -66,7 +69,7 @@ const Login = () => {
 
         {/* FORMULÁRIO */}
         <form className="login-form-atelier" onSubmit={handleSubmit}>
-          
+
           <div className="atelier-input-group">
             <label>E-MAIL</label>
             <input
@@ -80,7 +83,7 @@ const Login = () => {
 
           <div className="atelier-input-group">
             <label>SENHA</label>
-            {/* Container estrutural adicionado para o olho */}
+            {/* Container estrutural para o olho mantido do Código 2 */}
             <div className="senha-input-container">
               <input
                 type={showPassword ? "text" : "password"}

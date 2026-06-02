@@ -18,7 +18,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "USUARIO")
-public class Usuario implements UserDetails {
+public class Usuario implements UserDetails { // Adicionado o "implements UserDetails"
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,9 +32,8 @@ public class Usuario implements UserDetails {
 
 	@CreationTimestamp
 	@Column(name = "data_cadastro", nullable = false, updatable = false)
-	private LocalDateTime dataCadastro;
+    private LocalDateTime dataCadastro;
 
-	// --- Getters e Setters ---
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -85,50 +84,52 @@ public class Usuario implements UserDetails {
 	}
 
 	public LocalDateTime getDataCadastro() { 
-		return dataCadastro; 
-	}
-	
-	public void setDataCadastro(LocalDateTime dataCadastro) { 
-		this.dataCadastro = dataCadastro; 
-	}
+        return dataCadastro; 
+    }
+    
+    public void setDataCadastro(LocalDateTime dataCadastro) { 
+        this.dataCadastro = dataCadastro; 
+    }
 
 	// --- NOVOS MÉTODOS DO SPRING SECURITY (OBRIGATÓRIOS) ---
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// Retorna a autoridade baseada no seu campo 'tipoUsuario'
-		// Se tipoUsuario for nulo, define como USER por padrão
+		// Se tipoUsuario for nulo, define como ROLE_USER por padrão
 		String role = (tipoUsuario != null) ? tipoUsuario : "USER";
 		return List.of(new SimpleGrantedAuthority("ROLE_" + role));
 	}
 
 	@Override
 	public String getPassword() {
+		// O Spring Security precisa saber qual variável é a senha
 		return this.senha;
 	}
 
 	@Override
 	public String getUsername() {
+		// O Spring Security precisa saber qual variável é o login (o email)
 		return this.email;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return true;
+		return true; // Conta não expirada
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return true;
+		return true; // Conta não bloqueada
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return true;
+		return true; // Senha não expirada
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return true; // Usuário ativo
 	}
 }

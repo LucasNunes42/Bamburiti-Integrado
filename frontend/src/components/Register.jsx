@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; //  Importação dos ícones padrão
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Ícones mantidos da versão editada
 import './Register.css';
 
 const Register = () => {
@@ -13,6 +13,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  // 🔒 FUNÇÃO DE VALIDAÇÃO (Trazida pelo seu colega para aumentar a segurança)
   const validarSenhaForte = (senha, usuario) => {
     const senhasProibidas = ["123", "1234", "123456", "abcdef", "mudar123", "senha"];
     
@@ -37,9 +38,11 @@ const Register = () => {
     return null;
   };
 
+  // 🔌 FUNÇÃO QUE CONECTA COM O SPRING BOOT (Sua lógica original preservada)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Valida a senha antes de gastar processamento enviando para o servidor
     const erroSenha = validarSenhaForte(formData.senha, formData.usuario);
     if (erroSenha) {
       alert(erroSenha);
@@ -62,6 +65,7 @@ const Register = () => {
 
       if (response.ok) {
         alert("Conta criada com sucesso no ecossistema!");
+        // Limpa o formulário e reseta o olho da senha
         setFormData({ usuario: '', email: '', senha: '', termos: false });
         setShowPassword(false);
       } else {
@@ -92,6 +96,7 @@ const Register = () => {
 
         {/* FORMULÁRIO */}
         <form className="register-form-atelier" onSubmit={handleSubmit}>
+          
           <div className="atelier-input-group">
             <label>NOME DE USUÁRIO</label>
             <input
@@ -116,6 +121,7 @@ const Register = () => {
 
           <div className="atelier-input-group">
             <label>SENHA</label>
+            {/* Container estrutural do olho adicionado com sucesso */}
             <div className="senha-input-container">
               <input
                 type={showPassword ? "text" : "password"}
@@ -143,7 +149,17 @@ const Register = () => {
                 onChange={(e) => setFormData({ ...formData, termos: e.target.checked })}
               />
               <span className="atelier-checkmark"></span>
-              Aceito os termos de sustentabilidade
+              {/* MODIFICAÇÃO AQUI: Texto alterado para conter o link */}
+              Aceito os{" "}
+              <a 
+                href="/termos" 
+                className="termos-link"
+                target="_blank" 
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                termos de sustentabilidade
+              </a>
             </label>
           </div>
 
