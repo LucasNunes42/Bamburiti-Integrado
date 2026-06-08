@@ -12,14 +12,14 @@ const Register = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  
+
   // 🆕 Estados independentes para exibir/ocultar cada senha (Iniciam como false = ocultos)
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const validarSenhaForte = (senha, usuario) => {
     const senhasProibidas = ["123", "1234", "123456", "abcdef", "mudar123", "senha"];
-    
+
     if (senha.length < 8) {
       return "A senha deve ter pelo menos 8 caracteres.";
     }
@@ -177,7 +177,17 @@ const Register = () => {
                 onChange={(e) => setFormData({ ...formData, termos: e.target.checked })}
               />
               <span className="atelier-checkmark"></span>
-              Aceito os termos de sustentabilidade
+              {/* MODIFICAÇÃO AQUI: Texto alterado para conter o link */}
+              Aceito os{" "}
+              <a
+                href="/termos"
+                className="termos-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                termos de sustentabilidade
+              </a>
             </label>
           </div>
 

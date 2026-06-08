@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children, roleRequired }) => {
     const payload = JSON.parse(atob(base64));
     
     // Supondo que você salvou o tipo de usuário dentro do JWT sob a chave 'role' ou 'tipo'
-    const userRole = payload.role || localStorage.getItem('role'); 
+    const userRole = payload.role || payload.tipoUsuario || localStorage.getItem('tipoUsuario');
 
     // 3. Se o cargo do usuário não for o exigido, barra o acesso
     if (roleRequired && userRole !== roleRequired) {

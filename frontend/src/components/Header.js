@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom'; 
 import './Header.css';
 import logo from '../assets/img/logo bamburiti.png';
 import { FaUser, FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
@@ -7,32 +7,55 @@ import { FaUser, FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
 function Header() {
   const [openAccount, setOpenAccount] = useState(false); // Dropdown da conta
   const [menuMobile, setMenuMobile] = useState(false); // Menu hambúrguer
-  const navigate = useNavigate();
+  
+  // 🔄 Estados Reativos para o Login
+  const [isLogged, setIsLogged] = useState(false);
+  const [tipoUsuario, setTipoUsuario] = useState(null);
 
-  // 🔐 VERIFICAÇÃO DE LOGIN NO NAVEGADOR
-  const isLogged = !!localStorage.getItem('token');
-  const tipoUsuario = localStorage.getItem('tipoUsuario');
+  const navigate = useNavigate();
+  const location = useLocation(); // 📍 Monitora a troca de páginas (ex: sair do /login para a /)
+
+  // 🔐 ATUALIZAÇÃO AUTOMÁTICA DE LOGIN
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    let role = localStorage.getItem('tipoUsuario');
+
+    // Limpeza preventiva de aspas extras causadas por JSON.stringify
+    if (role) {
+      role = role.replace(/['"]+/g, ''); 
+    }
+
+    // 🕵️‍♂️ Debug no Console (Abra o F12 no navegador para checar este print)
+    console.log("=== HEADER LOG ===");
+    console.log("Tem token?", !!token);
+    console.log("Cargo detectado:", role);
+
+    setIsLogged(!!token);
+    setTipoUsuario(role);
+  }, [location]); // Sempre que o usuário mudar de página, o Header se reavalia
 
   const handleNavigation = (path) => {
     navigate(path);
     setOpenAccount(false);
-    setMenuMobile(false); // Fecha o menu ao navegar
+    setMenuMobile(false); 
   };
 
   // 🚪 FUNÇÃO PARA FAZER LOGOUT
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('tipoUsuario');
+    setIsLogged(false);
+    setTipoUsuario(null);
     setOpenAccount(false);
     setMenuMobile(false);
-    navigate('/'); // Manda de volta para a Home
+    navigate('/'); 
   };
 
   return (
     <header className="main-header">
       <div className="header-container">
 
-        {/* HAMBÚRGUER (Aparece apenas no Mobile via CSS) */}
+        {/* HAMBÚRGUER */}
         <div className="mobile-menu-icon" onClick={() => setMenuMobile(!menuMobile)}>
           {menuMobile ? <FaTimes /> : <FaBars />}
         </div>
@@ -44,7 +67,7 @@ function Header() {
           </Link>
         </div>
 
-        {/* CENTRO - Menu (Ganha a classe 'active' no Mobile) */}
+        {/* CENTRO - Menu */}
         <nav className={`header-center ${menuMobile ? 'active' : ''}`}>
           <ul className="header-menu">
             <li><Link to="/" onClick={() => setMenuMobile(false)}>Home</Link></li>
@@ -54,7 +77,7 @@ function Header() {
             <li><Link to="/blog" onClick={() => setMenuMobile(false)}>Blog</Link></li>
             <li><Link to="/sobre" onClick={() => setMenuMobile(false)}>Sobre</Link></li>
             
-            {/* SE FOR ADMIN: Mostra o link destacado também no menu central */}
+            {/* ⚙️ Link Central de Admin */}
             {tipoUsuario === 'ADMIN' && (
               <li>
                 <Link to="/admin" onClick={() => setMenuMobile(false)} style={{ color: '#00A550', fontWeight: 'bold' }}>
@@ -76,15 +99,14 @@ function Header() {
             
             {openAccount && (
               <div className="dropdown-menu-custom">
-                {/* Se NÃO estiver logado: mostra opções normais */}
                 {!isLogged ? (
                   <>
                     <button onClick={() => handleNavigation('/login')}>Entrar</button>
                     <button onClick={() => handleNavigation('/registrar')}>Registrar-se</button>
                   </>
                 ) : (
-                  // Se ESTIVER logado: mostra o Painel Admin e o botão de Logout
                   <>
+                    {/* ⚙️ Link do Dropdown de Admin */}
                     {tipoUsuario === 'ADMIN' && (
                       <button 
                         onClick={() => handleNavigation('/admin')} 

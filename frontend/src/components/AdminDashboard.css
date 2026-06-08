@@ -138,7 +138,7 @@
   background-color: #008440;
 }
 
-.btn-icon-edit, .btn-icon-delete {
+.btn-icon-edit, .btn-icon-delete, .btn-icon-check, .btn-icon-view {
   background: none;
   border: none;
   font-size: 18px;
@@ -150,6 +150,8 @@
 }
 .btn-icon-edit:hover { background-color: #e3f2fd; }
 .btn-icon-delete:hover { background-color: #ffebee; }
+.btn-icon-check:hover { background-color: #e6f4ea; }
+.btn-icon-view:hover { background-color: #f0f0f0; }
 
 /* Estrutura dos Modais Flutuantes */
 .modal-overlay {
@@ -232,4 +234,39 @@
 @keyframes fadeInModal {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
+}
+
+.row-lida td {
+  opacity: 0.5;
+  background-color: #f9f9f9;
+}
+
+/* 🎨 Estilização Customizada do Visualizador de Mensagens */
+.lead-view-card {
+  max-width: 550px;
+}
+
+.lead-detail-group {
+  margin-bottom: 16px;
+}
+
+.lead-detail-text {
+  font-size: 14px;
+  color: #333;
+  margin: 4px 0 0 0;
+}
+
+.lead-message-box {
+  background-color: #f4f6f8;
+  border: 1px solid #e1e4e8;
+  padding: 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #24292e;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 250px;
+  overflow-y: auto;
+  margin-top: 5px;
 }

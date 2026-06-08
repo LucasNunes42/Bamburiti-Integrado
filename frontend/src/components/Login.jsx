@@ -38,13 +38,13 @@ const Login = () => {
     
     // 🏷️ A CORREÇÃO: Salva o cargo (ADMIN/USER) que o seu Back-end retorna no login
     // (Ajuste para data.role ou data.tipoUsuario dependendo de como o seu DTO foi mapeado no Java)
-    const cargoUsuario = data.tipoUsuario || data.role || 'USER';
-    localStorage.setItem('role', cargoUsuario);
+    const tipoUsuario = data.tipoUsuario || data.role || 'USER';
+    localStorage.setItem('tipoUsuario', tipoUsuario);
     
     alert("Login efetuado com sucesso!");
     
     // 🔀 Redirecionamento Inteligente:
-    if (cargoUsuario === 'ADMIN') {
+    if (tipoUsuario === 'ADMIN') {
         navigate('/admin'); // Admin vai direto para o Painel de Controle
     } else {
         navigate('/'); // Usuário comum vai para a página inicial
