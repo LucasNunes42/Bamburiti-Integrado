@@ -29,7 +29,6 @@ public class UsuarioController {
 		return repository.findAll();
 	}
 
-	// --- MÉTODO: DELETAR USUÁRIO ---
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletarUsuario(@PathVariable Long id) {
 		if (!repository.existsById(id)) {
@@ -39,10 +38,8 @@ public class UsuarioController {
 		return ResponseEntity.noContent().build();
 	}
 
-	// --- MÉTODO: ALTERAR PERFIL (ADMIN/USER) ---
 	@PutMapping("/{id}/alterar-perfil")
 	public ResponseEntity<?> alterarPerfil(@PathVariable Long id, @RequestParam String novoTipo) {
-		// MELHORIA DE SEGURANÇA: Garante que o sistema só aceite perfis válidos
 		String tipoFormatado = novoTipo.toUpperCase();
 		if (!tipoFormatado.equals("ADMIN") && !tipoFormatado.equals("USER")) {
 			return ResponseEntity.badRequest().body("Tipo de usuário inválido! Use apenas 'ADMIN' ou 'USER'.");
