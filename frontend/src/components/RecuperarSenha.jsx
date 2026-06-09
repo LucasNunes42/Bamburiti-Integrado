@@ -1,39 +1,37 @@
 import React, { useState } from 'react';
-//import { useNavigate } from 'react-router-dom';
 import { useNavigate, Link } from 'react-router-dom';
-import './Login.css'; // Reaproveitando os estilos do seu Login!
+import './Login.css'; // Reaproveitando a identidade visual do Ateliê
 
 const RecuperarSenha = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // 🔌 Conexão com o endpoint de recuperação do Spring Boot
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // 🔌 CONEXÃO REAL AO BACK-END (SPRING BOOT)
       const response = await fetch('http://localhost:8080/api/auth/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        // Enviamos apenas o e-mail no corpo do pedido (body)
         body: JSON.stringify({ email: email }) 
       });
 
       if (response.ok) {
         alert(`As instruções de recuperação foram enviadas para o e-mail: ${email}`);
-        setEmail(''); // Limpa o campo de e-mail após o sucesso
-        navigate('/login'); // Retorna o utilizador para a página de login
+        setEmail(''); // Limpa o campo de entrada
+        navigate('/login'); // Redireciona o usuário de volta para o login
       } else {
         const mensagemErro = await response.text();
         alert(`Não foi possível efetuar o pedido: ${mensagemErro || 'E-mail não encontrado na base de dados.'}`);
       }
     } catch (error) {
       console.error("Erro na requisição:", error);
-      alert("Não foi possível conectar ao servidor. O seu Spring Boot está a correr?");
+      alert("Não foi possível conectar ao servidor. O seu Spring Boot está rodando?");
     } finally {
       setLoading(false);
     }
@@ -57,8 +55,9 @@ const RecuperarSenha = () => {
         <form className="login-form-atelier" onSubmit={handleSubmit}>
           
           <div className="atelier-input-group">
-            <label>E-MAIL CADASTRADO</label>
+            <label htmlFor="emailRecuperacao">E-MAIL CADASTRADO</label>
             <input
+              id="emailRecuperacao"
               type="email"
               placeholder="seu@email.com"
               required
@@ -69,13 +68,14 @@ const RecuperarSenha = () => {
 
           <div className="login-button-spacer">
             <button type="submit" className="btn-atelier-login" disabled={loading}>
-              {loading ? "A ENVIAR..." : "ENVIAR LINK"}
+              {loading ? "ENVIANDO..." : "ENVIAR LINK"}
             </button>
           </div>
         </form>
 
+        {/* FOOTER DO CARD */}
         <div className="login-footer-atelier">
-            <span>Lembrou-se da senha? <Link to="/login">Voltar para o Login</Link></span>
+          <span>Lembrou da senha? <Link to="/login">Voltar para o Login</Link></span>
         </div>
       </div>
     </div>

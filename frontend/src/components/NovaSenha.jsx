@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Ícones importados para o padrão Bamburiti
 import './Login.css';
 
 const NovaSenha = () => {
@@ -10,6 +11,10 @@ const NovaSenha = () => {
   const [novaSenha, setNovaSenha] = useState('');
   const [confirmarSenha, setConfirmarSenha] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // Estados independentes para alternar a visibilidade de cada campo de senha
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,24 +59,51 @@ const NovaSenha = () => {
         </div>
 
         <form className="login-form-atelier" onSubmit={handleSubmit}>
+          
+          {/* CAMPO: NOVA SENHA */}
           <div className="atelier-input-group">
-            <label>NOVA SENHA</label>
-            <input 
-              type="password" 
-              required 
-              value={novaSenha} 
-              onChange={(e) => setNovaSenha(e.target.value)} 
-            />
+            <label htmlFor="novaSenha">NOVA SENHA</label>
+            <div className="senha-input-container">
+              <input 
+                id="novaSenha"
+                type={showPassword ? "text" : "password"} 
+                placeholder="••••••••"
+                required 
+                value={novaSenha} 
+                onChange={(e) => setNovaSenha(e.target.value)} 
+              />
+              <button
+                type="button"
+                className="btn-olho-senha"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Esconder senha" : "Mostrar senha"}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
           </div>
 
+          {/* CAMPO: CONFIRMAR NOVA SENHA */}
           <div className="atelier-input-group">
-            <label>CONFIRMAR NOVA SENHA</label>
-            <input 
-              type="password" 
-              required 
-              value={confirmarSenha} 
-              onChange={(e) => setConfirmarSenha(e.target.value)} 
-            />
+            <label htmlFor="confirmarSenha">CONFIRMAR NOVA SENHA</label>
+            <div className="senha-input-container">
+              <input 
+                id="confirmarSenha"
+                type={showConfirmPassword ? "text" : "password"} 
+                placeholder="••••••••"
+                required 
+                value={confirmarSenha} 
+                onChange={(e) => setConfirmarSenha(e.target.value)} 
+              />
+              <button
+                type="button"
+                className="btn-olho-senha"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                aria-label={showConfirmPassword ? "Esconder confirmação de senha" : "Mostrar confirmação de senha"}
+              >
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
           </div>
 
           <div className="login-button-spacer">

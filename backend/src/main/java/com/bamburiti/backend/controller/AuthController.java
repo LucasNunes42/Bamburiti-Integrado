@@ -97,6 +97,8 @@ public class AuthController {
         
         tokenRepository.deleteByUsuarioIdUsuario(usuario.getIdUsuario());
         
+        tokenRepository.flush();
+        
         String token = UUID.randomUUID().toString();
         PasswordResetToken resetToken = new PasswordResetToken(token, usuario);
         tokenRepository.save(resetToken);
